@@ -22,7 +22,7 @@ import tunner from './utils/tunner'
 
 console.log(constants);
 window.game = new Phaser.Game({
-  type: Phaser.CANVAS,
+  type: Phaser.WEBGL,
   parent: 'content',
   width: constants.WIDTH,
   height: constants.HEIGHT,

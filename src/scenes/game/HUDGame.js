@@ -13,7 +13,7 @@ export default class HUDGameScene extends Scene {
       x: 50,
       y: 50,
       text: this.getText('pause'),
-      onClick: (self) => {
+      onClick: self => {
         this.sceneManager.overlay('pauseScene')
       }
     })

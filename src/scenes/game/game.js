@@ -5,14 +5,12 @@ import Business from './business/Business'
 export default class GameScene extends Scene {
   constructor () {
     super({key: 'gameScene'})
+    this.businesses = []
   }
   
-
   create (params) {
     super.create(params)
     this.id = Math.random()
-    this.laps = 0
-    this.rotationRatio = gs.stats.mainScene.rotationRatio || params.rotation || 0
     
     this.sceneManager.addGameScene(this.scene.key)
     this.sceneManager.overlay('HUDGameScene')
@@ -61,9 +59,15 @@ export default class GameScene extends Scene {
       x: 50,
       y: 600
     })
+
+    business1.on('moneyEarned', this.getMoney)
     
     this.base1 = this.add.existing(business1)
-    console.log(this.base1)
+    this.businesses.push(business1)
+  }
+
+  getMoney(value) {
+    console.log(`we got ${value}`)
   }
 
   shutdown() {
@@ -78,9 +82,12 @@ export default class GameScene extends Scene {
     }
   }
 
-  update () {
-    super.update()
+  update (time, dt) {
+    super.update(time, dt)
 
+    this.businesses.forEach( business => {
+      business.update(dt)
+    })
   }
 
   /**
