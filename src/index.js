@@ -20,6 +20,7 @@ import getDataManager from './managers/dataManager'
 import gs from './config/gameStats'
 import tunner from './utils/tunner'
 
+console.log(constants);
 window.game = new Phaser.Game({
   type: Phaser.CANVAS,
   parent: 'content',
@@ -29,8 +30,8 @@ window.game = new Phaser.Game({
   canvas: document.getElementById('game'),
   backgroundColor: constants.BACKGROUND_COLOR,
   pixelArt: true,
-  resolution: constants.SCALE,
-  zoom: 2,
+  resolution: constants.ZOOM,
+  zoom: constants.ZOOM,
   scene: [
     BootScene,
     SplashScene,

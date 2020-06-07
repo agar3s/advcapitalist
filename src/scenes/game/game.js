@@ -1,5 +1,6 @@
 import Scene from '../scene'
 import gs from '../../config/gameStats'
+import Business from './business/Business'
 
 export default class GameScene extends Scene {
   constructor () {
@@ -38,7 +39,8 @@ export default class GameScene extends Scene {
       }
     )
     this.label.setOrigin(0.5)
-    //this.add(this.label)
+
+    this.setupBusinesses()
 
     
     // load gui
@@ -50,6 +52,18 @@ export default class GameScene extends Scene {
       gs.setListener('mainScene.logoPosition.y', val => {})
       gs.setListener('actor.state', val => {})
     }
+  }
+
+  setupBusinesses () {
+    let business1 = new Business({
+      scene: this,
+      text: 'business 1',
+      x: 50,
+      y: 600
+    })
+    
+    this.base1 = this.add.existing(business1)
+    console.log(this.base1)
   }
 
   shutdown() {

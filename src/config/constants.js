@@ -7,7 +7,7 @@
   this valus loaded in the constructor.
 */
 
-const SCALE = 1
+const ZOOM = 1
 const BACKGROUND_COLOR = 0x000
 
 // time in milliseconds to keep visible the "splash" scene
@@ -36,7 +36,7 @@ const AFTER_BOOT_SCENE = 'gameScene'
 export default {
   WIDTH: 360,
   HEIGHT: 640,
-  SCALE,
+  ZOOM,
   BACKGROUND_COLOR,
   FAKE_LOADER_ACTIVE,
   TIME_SPLASH,
