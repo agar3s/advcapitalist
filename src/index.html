@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Adventure Capitalist</title>
+	<style>
+    @font-face {
+      font-family: "tablet-medium";
+      src: url("assets/fonts/sf-ui-display-medium.otf");
+    }
+
+    @font-face {
+      font-family: "tablet-light";
+      src: url("assets/fonts/sf-ui-display-light.otf");
+    }
+
+    @font-face {
+      font-family: "tablet-semibold";
+      src: url("assets/fonts/sf-ui-display-semibold.otf");
+    }
+
+    @font-face {
+      font-family: "tablet-thin";
+      src: url("assets/fonts/sf-ui-display-thin.otf");
+    }
+
+    @font-face {
+      font-family: "digital";
+      src: url("assets/fonts/djb-get-digital.ttf") format('truetype');
+    }
+
+    @font-face {
+      font-family: 'righteousregular';
+      src: url('assets/fonts/righteous-regular.woff2') format('woff2'),
+           url('assets/fonts/righteous-regular.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+	html,
+	body {
+		margin: 0 auto;
+		box-sizing: border-box;
+		background-color: #141414;
+  		height: 100%;
+  		padding: 0;
+	}
+
+    #gameContainer {
+      height: 100%;
+    }
+
+    canvas#game:-moz-full-screen {
+      height: 100vh;
+    }
+
+    canvas#game:-webkit-full-screen {
+      height: 100vh;
+    }
+
+    canvas#game:fullscreen {
+      height: 100vh;
+    }
+
+	.dg.ac {
+		top: 50px !important;
+	}
+
+	.dg main a {
+		margin: 0;
+	}
+	</style>
+</head>
+
+<body>
+	<div class="boilerplate-wrapper">
+		<div class="gameContainer">
+			<canvas id='game' autofocus></canvas>
+		</div>
+		<div class="footer">
+			<button id="fullScreen" class="fullscreen-btn">&#x2922; Fullscreen</button>
+		</div>
+	</div>
+</body>
+
+</html>
