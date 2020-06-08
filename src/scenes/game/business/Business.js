@@ -10,8 +10,15 @@ export default class Business extends Phaser.GameObjects.Container {
     this.initialRevenue = 1 || params.initialRevenue
     this.revenue = this.initialRevenue
     this.initialTime = (params.time || 0.6) * 1000
+    this.coefficient = 1.07
+    this.productivity = this.initialRevenue / this.initialTime
+    this.investments = 1
+    // cost in cents
+    this.initialCost = 373.8
+    this.cost = this.initialCost
 
-    this.label = params.scene.add.text(
+    // progress label control
+    this.progressLabel = params.scene.add.text(
       0,
       0,
       params.text,
@@ -22,17 +29,18 @@ export default class Business extends Phaser.GameObjects.Container {
         color: '#fff'
       }
     )
-    this.label.setOrigin(0.5)
-    this.add(this.label)
+    this.progressLabel.setOrigin(0.5)
+    this.add(this.progressLabel)
 
-    // basic icon to produce
+    // 
+
+
+    // start production button
     this.produceButton = this.scene.createButton({
       x: 150,
       y: 0,
       text: `Produce`,
-      onClick: _ => {
-        this.produce()
-      },
+      onClick: _ => this.produce(),
       onHover: self => {
         if (this.producing) return
         self.setTint(0xff0000)
@@ -43,6 +51,17 @@ export default class Business extends Phaser.GameObjects.Container {
       }
     })
     this.add(this.produceButton)
+
+    // invest button
+    this.investButton = this.scene.createButton({
+      x: 30,
+      y: 20,
+      text: `invest`,
+      onClick: _ => this.invest()
+    })
+    this.add(this.investButton)
+
+
 
   }
 
@@ -60,7 +79,17 @@ export default class Business extends Phaser.GameObjects.Container {
     this.time = 0
     this.producing = false
     this.produceButton.setTint(0xffffff)
-    this.emit('moneyEarned', this.revenue)
+    this.emit('moneyEarned', this.revenue*this.investments)
+  }
+
+  // should validate if there is enough money to invest
+  invest () {
+    this.investments += 1
+    updateCost()
+  }
+
+  updateCost () {
+    this.cost = Math.round(Math.pow(this.coefficient, this.investments) * this.initialCost)
   }
 
   /**
@@ -70,7 +99,7 @@ export default class Business extends Phaser.GameObjects.Container {
     if (!this.producing) return
     this.time -= dt
 
-    this.label.setText(`${this.time.toFixed(2)}`)
+    this.progressLabel.setText(`${this.time.toFixed(2)}`)
     if (this.time < 0) {
       this.earnMoney()
     }
