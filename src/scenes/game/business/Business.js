@@ -12,6 +12,11 @@ const parseTime = time =>  {
   return `${seconds}s`
 }
 
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
 export default class Business extends Phaser.GameObjects.Container {
 
   constructor (params) {
@@ -19,19 +24,28 @@ export default class Business extends Phaser.GameObjects.Container {
 
     this.producing = false
     this.time = 0
-    this.initialRevenue = 1 || params.initialRevenue
+    this.speed = 1
+    this.initialRevenue = params.revenue || 100
     this.revenue = this.initialRevenue
     this.initialTime = (params.time || 0.6) * 1000
-    this.coefficient = 1.07
-    this.investments = 1
+    this.coefficient = params.coefficient || 1.07
+    this.investments = params.invesments || 1
     this.productivity = this.initialRevenue * this.investments / this.initialTime
     // cost in cents
-    this.initialCost = 373.8
+    this.initialCost = params.cost || 373.8
     this.cost = this.initialCost
     this.nextUnlockIndex = 0
+    this.manager = false
+
+    this.icon = params.scene.add.sprite(10, 10, params.icon)
+    this.icon.setInteractive({ useHandCursor: true })
+    this.icon.on('pointerdown', _ => {
+      this.produce()
+    })
+    this.add(this.icon)
 
     // progress label control
-    this.progressLabel = params.scene.add.text(
+    this.revenueLabel = params.scene.add.text(
       0,
       0,
       params.text,
@@ -42,8 +56,11 @@ export default class Business extends Phaser.GameObjects.Container {
         color: '#fff'
       }
     )
-    this.progressLabel.setOrigin(0.5)
-    this.add(this.progressLabel)
+    this.revenueLabel.setOrigin(0.5)
+    this.add(this.revenueLabel)
+
+    this.progressBar = this.scene.add.graphics()
+    this.add(this.progressBar)
 
     // total invesments
     this.invesmentsLabel = params.scene.add.text(
@@ -97,11 +114,14 @@ export default class Business extends Phaser.GameObjects.Container {
       x: 30,
       y: 20,
       text: `invest`,
-      onClick: _ => this.invest()
+      onClick: _ => {
+        this.emit('investIntent')
+      }
     })
     this.add(this.investButton)
 
 
+    this.updateCost()
 
   }
 
@@ -110,7 +130,6 @@ export default class Business extends Phaser.GameObjects.Container {
     this.producing = true
     this.time = this.initialTime
     this.produceButton.setTint(0x00ff00)
-    console.log('start producing')
   }
 
   earnMoney () {
@@ -118,6 +137,10 @@ export default class Business extends Phaser.GameObjects.Container {
     this.producing = false
     this.produceButton.setTint(0xffffff)
     this.emit('moneyEarned', this.revenue*this.investments)
+
+    if (this.manager) {
+      this.produce()
+    }
   }
 
   // should validate if there is enough money to invest
@@ -127,16 +150,18 @@ export default class Business extends Phaser.GameObjects.Container {
     this.checkUnlock()
     this.updateInvestmentLabel()
     this.productivity = this.revenue*this.investments / this.initialTime
+    this.revenueLabel.setText(formatter.format(this.revenue*this.investments*0.01))
   }
 
   updateCost () {
     this.cost = Math.round(Math.pow(this.coefficient, this.investments) * this.initialCost)
+    this.investButton.text = `invest ${formatter.format(this.cost*0.01)}`
   }
 
   checkUnlock() {
     if (this.investments != unlockValues[this.nextUnlockIndex]) return
     this.nextUnlockIndex += 1
-    this.initialTime /= 2
+    this.speed *= 2
   }
 
   updateInvestmentLabel() {
@@ -152,13 +177,26 @@ export default class Business extends Phaser.GameObjects.Container {
   */
   update (dt) {
     if (!this.producing) return
-    this.time -= dt
+    this.time -= dt*this.speed
 
-    this.progressLabel.setText(`${this.time.toFixed(2)}`)
-    this.timeLabel.text = parseTime(this.time)
+    
+    this.timeLabel.text = parseTime(this.time/this.speed)
+    this.updateProgress()
     if (this.time < 0) {
       this.earnMoney()
     }
+  }
+
+  updateProgress() {
+    let value = this.time/this.initialTime
+    this.progressBar.clear()
+    this.progressBar.fillStyle(0x339933, 1)
+    this.progressBar.fillRect(
+      10,
+      20,
+      100 * (1-value),
+      30
+    )
   }
 
 }

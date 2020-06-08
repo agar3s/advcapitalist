@@ -2,6 +2,11 @@ import Scene from '../scene'
 import gs from '../../config/gameStats'
 import Business from './business/Business'
 
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
 export default class GameScene extends Scene {
   constructor () {
     super({key: 'gameScene'})
@@ -11,14 +16,12 @@ export default class GameScene extends Scene {
   create (params) {
     super.create(params)
     this.id = Math.random()
+
+    this.money = 0
     
     this.sceneManager.addGameScene(this.scene.key)
     this.sceneManager.overlay('HUDGameScene')
 
-    this.actorPosition = {
-      x: gs.stats.mainScene.logoPosition.x || this.cameras.main.width/2,
-      y: gs.stats.mainScene.logoPosition.y || this.cameras.main.height/2
-    }
 
     this.events.on('shutdown', _ => this.shutdown(), this)
     this.events.on('pause', _ => this.pause(), this)
@@ -38,8 +41,13 @@ export default class GameScene extends Scene {
     )
     this.label.setOrigin(0.5)
 
+    this.cameras.main.setSize(320, 1200);
     this.setupBusinesses()
 
+
+    this.input.on('wheel', (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
+      this.cameras.main.scrollY += deltaY * 0.5;
+    });
     
     // load gui
     if (this.constants.DAT_GUI_ENABLE) {
@@ -53,51 +61,40 @@ export default class GameScene extends Scene {
   }
 
   setupBusinesses () {
-    let business1 = new Business({
-      scene: this,
-      text: 'Lemon',
-      x: 50,
-      y: 100,
-      time: 0.6
-    })
+    gs.stats.businesses.forEach((businessData, index) => {
 
-    business1.on('moneyEarned', this.getMoney)
-    
-    this.add.existing(business1)
-    this.businesses.push(business1)
+      let businessObject = new Business({
+        scene: this,
+        x: 50,
+        y: (index+1)*100,
+        ...businessData
+      })
 
-
-    let business2 = new Business({
-      scene: this,
-      text: 'Newspaper',
-      x: 50,
-      y: 200,
-      time: 3
-    })
-
-    business2.on('moneyEarned', this.getMoney)
-    
-    this.add.existing(business2)
-    this.businesses.push(business2)
-
-    let business3 = new Business({
-      scene: this,
-      text: 'Car Wash',
-      x: 50,
-      y: 300,
-      time: 6
-    })
-
-    business3.on('moneyEarned', this.getMoney)
-    
-    this.add.existing(business3)
-    this.businesses.push(business3)
+      businessObject.on('moneyEarned', money => {
+        this.addMoney(money)
+      })
+      businessObject.on('investIntent', _ => {
+        this.checkInvesment(businessObject)
+      })
+      
+      this.add.existing(businessObject)
+      this.businesses.push(businessObject)
+    });
     
   }
 
-  getMoney(value) {
-    console.log(`we got ${value}`)
+  addMoney(money) {
+    this.money += money
+    this.label.text = formatter.format(this.money*0.01)
+
   }
+
+  checkInvesment(business) {
+    if (this.money < business.cost) return
+    this.addMoney(-business.cost)
+    business.invest()
+  }
+
 
   shutdown() {
     this.events.off('shutdown')

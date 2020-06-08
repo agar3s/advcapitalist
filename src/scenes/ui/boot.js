@@ -91,6 +91,19 @@ export default class BootScene extends Scene {
       frameHeight: 331
     })
 
+    // load icons
+    const iconsRoute = `${urlBase}assets/sprites/business/`
+    this.load.image('lemonade', iconsRoute + 'Lemonade_Stand.png')
+    this.load.image('newspaper', iconsRoute + 'Newspaper_Delivery.png')
+    this.load.image('car', iconsRoute + 'Car_Wash.png')
+    this.load.image('pizza', iconsRoute + 'Pizza_Delivery.png')
+    this.load.image('donut', iconsRoute + 'Donut_Shop.png')
+    this.load.image('shrimp', iconsRoute + 'Shrimp_Boat.png')
+    this.load.image('hockey', iconsRoute + 'Hockey_Team.png')
+    this.load.image('movie', iconsRoute + 'Movie_Studio.png')
+    this.load.image('bank', iconsRoute + 'Bank.png')
+    this.load.image('oil', iconsRoute + 'Oil_Company.png')
+
 
     // load fonts
     this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')

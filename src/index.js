@@ -20,7 +20,7 @@ import getDataManager from './managers/dataManager'
 import gs from './config/gameStats'
 import tunner from './utils/tunner'
 
-console.log(constants);
+
 window.game = new Phaser.Game({
   type: Phaser.WEBGL,
   parent: 'content',
