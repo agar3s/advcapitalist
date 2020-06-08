@@ -25,8 +25,8 @@ export default class GameScene extends Scene {
     this.events.on('resume', _ => this.resume(), this)
 
     this.label = this.add.text(
-      250,
-      320,
+      160,
+      20,
       'a sample text',
       {
         fontFamily: 'Kenney',
@@ -55,15 +55,44 @@ export default class GameScene extends Scene {
   setupBusinesses () {
     let business1 = new Business({
       scene: this,
-      text: 'business 1',
+      text: 'Lemon',
       x: 50,
-      y: 600
+      y: 100,
+      time: 0.6
     })
 
     business1.on('moneyEarned', this.getMoney)
     
-    this.base1 = this.add.existing(business1)
+    this.add.existing(business1)
     this.businesses.push(business1)
+
+
+    let business2 = new Business({
+      scene: this,
+      text: 'Newspaper',
+      x: 50,
+      y: 200,
+      time: 3
+    })
+
+    business2.on('moneyEarned', this.getMoney)
+    
+    this.add.existing(business2)
+    this.businesses.push(business2)
+
+    let business3 = new Business({
+      scene: this,
+      text: 'Car Wash',
+      x: 50,
+      y: 300,
+      time: 6
+    })
+
+    business3.on('moneyEarned', this.getMoney)
+    
+    this.add.existing(business3)
+    this.businesses.push(business3)
+    
   }
 
   getMoney(value) {
