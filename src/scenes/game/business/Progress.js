@@ -24,7 +24,7 @@ export default class Icon extends Phaser.GameObjects.Container {
       0,
       '',
       {
-        fontFamily: 'kenneyMini',
+        fontFamily: '18px Calvert bold',
         fontSize: 12,
         align: 'center',
         color: '#fff'

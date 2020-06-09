@@ -22,10 +22,10 @@ export default class HUDGameScene extends Scene {
     this.titleText.x += 20
 
     // display and get notified when a value changes in the game
-    this.angleText = this.add.bitmapText(450, 550, this.fonts.BM_keney.font, this.getText('angle', [this.registry.get('angle')]))
-    this.angleText.setTint(0xffffff)
-    this.lapsText = this.add.bitmapText(450, 570, this.fonts.BM_keney.font, this.getText('laps', [this.registry.get('laps') || 0]))
-    this.lapsText.setTint(0xffffff)
+    //this.angleText = this.add.bitmapText(450, 550, this.fonts.BM_calvert.font, this.getText('angle', [this.registry.get('angle')]))
+    //this.angleText.setTint(0xffffff)
+    //this.lapsText = this.add.bitmapText(450, 570, this.fonts.BM_keney.font, this.getText('laps', [this.registry.get('laps') || 0]))
+    //this.lapsText.setTint(0xffffff)
 
     this.registry.events.on('changedata', this.updateData, this)
   }

@@ -26,7 +26,7 @@ export default class Time extends Phaser.GameObjects.Container {
       anchor.y + timeBg.height/4 - 2,
       ``,
       {
-        fontFamily: 'kenneyMini',
+        fontFamily: 'CalvertMT',
         fontSize: 10,
         align: 'center',
         color: '#fff'

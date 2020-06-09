@@ -5,7 +5,7 @@ export default class Invest extends Phaser.GameObjects.Container {
     super(params.scene, params.x, params.y)
 
     let anchor = {x: 0, y: 0}
-    this.enabled = false
+    this.enabled = true
 
     this.investButton = params.scene.add.image(anchor.x, anchor.y, 'buyButton')
     this.investButton.setScale(0.5).setOrigin(0).setInteractive({ useHandCursor: true })
@@ -48,7 +48,7 @@ export default class Invest extends Phaser.GameObjects.Container {
       anchor.y + 16,
       'BUY X1',
       {
-        fontFamily: 'kenneyMini',
+        fontFamily: 'CalvertMT',
         fontSize: 12,
         align: 'left',
         color: '#fff'
@@ -62,7 +62,7 @@ export default class Invest extends Phaser.GameObjects.Container {
       anchor.y + 16,
       '',
       {
-        fontFamily: 'kenneyMini',
+        fontFamily: 'CalvertMT',
         fontSize: 10,
         align: 'right',
         color: '#fff'
@@ -77,6 +77,7 @@ export default class Invest extends Phaser.GameObjects.Container {
   }
 
   setEnabled(enabled) {
+    if(this.enabled == enabled) return
     this.enabled = enabled
     this.investButton.visible = this.enabled
     this.investButtonDisabled.visible = !this.enabled

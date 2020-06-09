@@ -17,7 +17,7 @@ export default class GameScene extends Scene {
     super.create(params)
     this.id = Math.random()
 
-    this.money = 0
+    //gs.stats.game.money
     
     this.sceneManager.addGameScene(this.scene.key)
     this.sceneManager.overlay('HUDGameScene')
@@ -32,7 +32,7 @@ export default class GameScene extends Scene {
       20,
       'a sample text',
       {
-        fontFamily: 'Kenney',
+        fontFamily: '18px Calvert bold',
         fontSize: 22,
         color: '#fff',
         align: 'center',
@@ -73,6 +73,7 @@ export default class GameScene extends Scene {
       businessObject.on('moneyEarned', money => {
         this.addMoney(money)
       })
+
       businessObject.on('investIntent', _ => {
         this.checkInvesment(businessObject)
       })
@@ -84,13 +85,15 @@ export default class GameScene extends Scene {
   }
 
   addMoney(money) {
-    this.money += money
-    this.label.text = formatter.format(this.money*0.01)
+    gs.set('game.money', gs.stats.game.money + money)
+    //gs.stats.game.money
+    //this.money += money
+    this.label.text = formatter.format(gs.stats.game.money*0.01)
 
   }
 
   checkInvesment(business) {
-    if (this.money < business.cost) return
+    if (gs.stats.game.money < business.cost) return
     this.addMoney(-business.cost)
     business.invest()
   }

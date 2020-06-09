@@ -4,7 +4,8 @@ let stats = {
   game: {
     backgroundColor: '#000',
     language: 'en',
-    debug: false
+    debug: false,
+    money: 0
   },
   mainScene: { },
   scene: {

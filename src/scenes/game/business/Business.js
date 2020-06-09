@@ -5,6 +5,8 @@ import Invest from './Invest'
 import Time from './Time'
 import Manager from './Manager'
 
+import gs from '../../../config/gameStats'
+
 const unlockValues = [25, 50, 100, 200, 300, 400]
 
 var formatter = new Intl.NumberFormat('en-US', {
@@ -101,6 +103,7 @@ export default class Business extends Phaser.GameObjects.Container {
     }
   }
 
+
   // should validate if there is enough money to invest
   invest () {
     this.investments += 1
@@ -123,10 +126,15 @@ export default class Business extends Phaser.GameObjects.Container {
     this.speed *= 2
   }
 
+  checkCosts(money) {
+    this.investButton.setEnabled(money>=this.cost)
+  }
+
   /**
   * Update
   */
   update (dt) {
+    this.checkCosts(gs.stats.game.money)
     if (!this.producing) return
     this.time -= dt*this.speed
 

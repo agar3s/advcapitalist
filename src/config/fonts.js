@@ -2,14 +2,14 @@
 
 export default {
   default: {
-    font: '20px monospace',
+    font: '20px Calvert',
     fill: '#ffffff'
   },
-  'BM_keney': {
-    font: 'keneyPixel',
+  'BM_calvert': {
+    font: '18px Calvert bold',
     hoverColor: 0x12aa99,
     color: 0xffffff,
-    scale: 2.0
+    scale: 1.0
   },
   'BM_kenneyMini': {
     font: 'kenneyMini',
