@@ -5,7 +5,7 @@ let stats = {
     backgroundColor: '#000',
     language: 'en',
     debug: false,
-    money: 0
+    money: 900000000000
   },
   mainScene: { },
   scene: {
@@ -20,7 +20,10 @@ let stats = {
       coefficient: 1.07,
       time: 0.6,
       revenue: 100,
-      investments: 1
+      investments: 1,
+      managerCost: 100000,
+      managerKey: 'dwarf1',
+      managerIndex: 0
     },
     {
       business: 'Drill',
@@ -29,7 +32,10 @@ let stats = {
       coefficient: 1.15,
       time: 3,
       revenue: 6000,
-      investments: 0
+      investments: 0,
+      managerCost: 100000,
+      managerKey: 'dwarf2',
+      managerIndex: 51
     },
     {
       business: 'Tavern',
@@ -38,7 +44,10 @@ let stats = {
       coefficient: 1.14,
       time: 6,
       revenue: 54000,
-      investments: 0
+      investments: 0,
+      managerCost: 100000,
+      managerKey: 'dwarf1',
+      managerIndex: 54
     },
     {
       business: 'Forge',
@@ -47,7 +56,10 @@ let stats = {
       coefficient: 1.13,
       time: 12,
       revenue: 432000,
-      investments: 0
+      investments: 0,
+      managerCost: 100000,
+      managerKey: 'dwarf2',
+      managerIndex: 0
     },
     {
       business: 'Jewelery',
@@ -56,7 +68,10 @@ let stats = {
       coefficient: 1.12,
       time: 24,
       revenue: 5184000,
-      investments: 0
+      investments: 0,
+      managerCost: 100000,
+      managerKey: 'dwarf2',
+      managerIndex: 6
     },
     {
       business: 'Trade',
@@ -65,7 +80,10 @@ let stats = {
       coefficient: 1.11,
       time: 96,
       revenue: 62208000,
-      investments: 0
+      investments: 0,
+      managerCost: 100000,
+      managerKey: 'dwarf1',
+      managerIndex: 6
     },
     {
       business: 'Castle',
@@ -74,7 +92,10 @@ let stats = {
       coefficient: 1.10,
       time: 384,
       revenue: 746496000,
-      investments: 0
+      investments: 0,
+      managerCost: 100000,
+      managerKey: 'dwarf2',
+      managerIndex: 57
     },
     {
       business: 'Army',
@@ -83,7 +104,10 @@ let stats = {
       coefficient: 1.09,
       time: 1536,
       revenue: 8954952000,
-      investments: 0
+      investments: 0,
+      managerCost: 100000,
+      managerKey: 'dwarf2',
+      managerIndex: 3
     },
     {
       business: 'Quest',
@@ -92,7 +116,10 @@ let stats = {
       coefficient: 1.08,
       time: 6144,
       revenue: 1074954240,
-      investments: 0
+      investments: 0,
+      managerCost: 100000,
+      managerKey: 'dwarf2',
+      managerIndex: 54
     }
   ]
 }

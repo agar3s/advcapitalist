@@ -26,13 +26,15 @@ export default class Business extends Phaser.GameObjects.Container {
     this.revenue = this.initialRevenue
     this.initialTime = (params.time || 0.6) * 1000
     this.coefficient = params.coefficient || 1.07
-    this.investments = params.invesments || 1
+    this.investments = params.investments
     this.productivity = this.initialRevenue * this.investments / this.initialTime
     // cost in cents
     this.initialCost = params.cost || 373.8
     this.cost = this.initialCost
     this.nextUnlockIndex = 0
     this.manager = false
+    this.managerCost = params.managerCost
+    this.locked = params.investments == 0
 
     let bg = params.scene.add.sprite(20, 0, 'businessBg')
     bg.setOrigin(0)
@@ -81,10 +83,23 @@ export default class Business extends Phaser.GameObjects.Container {
     this.managerContainer = new Manager({
       scene: params.scene,
       x: 280,
-      y: 16
+      y: 16,
+      managerKey: params.managerKey,
+      managerIndex: params.managerIndex
+    })
+    this.managerContainer.on('hire', _ => {
+      this.emit('hireIntent')
     })
     this.add(this.managerContainer)
-
+    this.setLocked(this.locked)
+  }
+  
+  setLocked(locked) {
+    this.locked = locked
+    this.icon.visible = !this.locked
+    this.progressBar.visible = !this.locked
+    this.timeContainer.visible = !this.locked
+    this.managerContainer.visible = !this.locked
   }
 
   produce () {
@@ -113,6 +128,15 @@ export default class Business extends Phaser.GameObjects.Container {
     this.productivity = this.revenue*this.investments / this.initialTime
     
     this.progressBar.updateRevenueText(formatter.format(this.revenue*this.investments*0.01))
+    if (this.investments == 1) {
+      this.setLocked(false)
+    }
+  }
+
+  hireManager () {
+    this.manager = true
+    this.managerContainer.setHasManager(true)
+    this.produce()
   }
 
   updateCost () {
@@ -128,6 +152,7 @@ export default class Business extends Phaser.GameObjects.Container {
 
   checkCosts(money) {
     this.investButton.setEnabled(money>=this.cost)
+    this.managerContainer.setEnabled(money>=this.managerCost)
   }
 
   /**

@@ -4,7 +4,7 @@ export default class Manager extends Phaser.GameObjects.Container {
   constructor (params) {
     super(params.scene, params.x, params.y)
     this.anchor = {x: 0, y: 0}
-    this.enabled = false
+    
     this.hasManager = false
     this.createButtons(params)
     this.createPortrait(params)
@@ -51,12 +51,14 @@ export default class Manager extends Phaser.GameObjects.Container {
     this.managerBg = params.scene.add.image(this.anchor.x, this.anchor.y, 'managerBG')
     this.managerBg.setScale(0.5).setOrigin(0).setInteractive({ useHandCursor: true }).setVisible(this.hasManager)
     this.add(this.managerBg)
-    this.managerSprite = params.scene.add.sprite(this.managerBg.width/4, this.managerBg.height/4 - 2, 'dwarf1')
+    this.managerSprite = params.scene.add.sprite(this.managerBg.width/4, this.managerBg.height/4 - 2, params.managerKey, params.managerIndex)
     this.managerSprite.setScale(0.5).setVisible(this.hasManager)
+    console.log(this.managerSprite)
     this.add(this.managerSprite)
   }
 
   setEnabled(enabled) {
+    if(this.enabled == enabled) return
     this.enabled = enabled
     this.hireManagerButton.visible = this.enabled
     this.hireManagerButtonDisabled.visible = !this.enabled

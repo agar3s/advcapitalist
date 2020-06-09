@@ -77,6 +77,10 @@ export default class GameScene extends Scene {
       businessObject.on('investIntent', _ => {
         this.checkInvesment(businessObject)
       })
+
+      businessObject.on('hireIntent', _ => {
+        this.checkHire(businessObject)
+      })
       
       this.add.existing(businessObject)
       this.businesses.push(businessObject)
@@ -97,6 +101,13 @@ export default class GameScene extends Scene {
     this.addMoney(-business.cost)
     business.invest()
   }
+
+  checkHire(business) {
+    if (gs.stats.game.money < business.managerCost) return
+    this.addMoney(-business.managerCost)
+    business.hireManager()
+  }
+  
 
 
   shutdown() {
