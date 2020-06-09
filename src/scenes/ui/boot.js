@@ -130,7 +130,7 @@ export default class BootScene extends Scene {
     this.load.image('trade', iconsRoute + 'trade.png')
     this.load.image('castle', iconsRoute + 'castle.png')
     this.load.image('army', iconsRoute + 'army.png')
-    this.load.image('quest', iconsRoute + 'coin.png')
+    this.load.image('quest', iconsRoute + 'quest.png')
     
     this.load.image('coin', iconsRoute + 'coin.png')
 

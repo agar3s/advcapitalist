@@ -5,7 +5,7 @@ let stats = {
     backgroundColor: '#000',
     language: 'en',
     debug: false,
-    money: 900000000000
+    money: 90000
   },
   mainScene: { },
   scene: {
