@@ -23,15 +23,16 @@ import tunner from './utils/tunner'
 
 window.game = new Phaser.Game({
   type: Phaser.WEBGL,
-  parent: 'content',
   width: constants.WIDTH,
   height: constants.HEIGHT,
   parent: document.getElementById('gameContainer'),
   canvas: document.getElementById('game'),
   backgroundColor: constants.BACKGROUND_COLOR,
-  pixelArt: true,
-  resolution: constants.ZOOM,
-  zoom: constants.ZOOM,
+  scale: {
+    parent: '.gameContainer',
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER_BOTH
+  },
   scene: [
     BootScene,
     SplashScene,
@@ -47,12 +48,17 @@ window.game = new Phaser.Game({
 getSceneManager(window.game.scene)
 getDataManager()
 
-document.getElementById('game').focus()
-window.focus()
+setTimeout(() => {
+  document.querySelector('canvas').focus()
+  window.focus()
+  document.querySelector('canvas').oncontextmenu = function (e) {
+    e.preventDefault()
+  }
+}, 1000)
 
 
 // how it works with game context?
-if(constants.DAT_GUI_ENABLE) {
+if (constants.DAT_GUI_ENABLE) {
   gs.setListener('game.backgroundColor', (val) => {
     let color = Phaser.Display.Color.HexStringToColor(val)
     game.renderer.config.backgroundColor = color
@@ -68,10 +74,4 @@ if(constants.DAT_GUI_ENABLE) {
   })
 }
 
-document.getElementById('fullScreen').onclick = () => {
-  window['game']['canvas'][game.device.fullscreen.request]()
-}
 
-document.getElementById('game').oncontextmenu = function (e) {
-  e.preventDefault()
-}

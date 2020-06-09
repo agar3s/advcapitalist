@@ -41,7 +41,7 @@ export default class GameScene extends Scene {
     )
     this.label.setOrigin(0.5)
 
-    this.cameras.main.setSize(320, 1200);
+    this.cameras.main.setSize(360, 1200);
     this.setupBusinesses()
 
 
@@ -65,7 +65,7 @@ export default class GameScene extends Scene {
 
       let businessObject = new Business({
         scene: this,
-        x: 50,
+        x: 0,
         y: (index+1)*100,
         ...businessData
       })

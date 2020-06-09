@@ -91,19 +91,51 @@ export default class BootScene extends Scene {
       frameHeight: 331
     })
 
+    // load ui
+    const uiRoute = `${urlBase}assets/sprites/ui/`
+
+    this.load.image('businessBg', uiRoute + 'section_bg.png')
+    this.load.image('iconBg', uiRoute + 'icon_bg.png')
+    this.load.image('iconBar', uiRoute + 'icon_bar.png')
+    this.load.image('iconBarLoad', uiRoute + 'icon_bar_load.png')
+    this.load.image('progressLoadBar', uiRoute + 'load_bar.png')
+    this.load.image('progressFillBar', uiRoute + 'load_fill_bar.png')
+    this.load.image('buyButton', uiRoute + 'buy_button.png')
+    this.load.image('buyButtonHover', uiRoute + 'buy_button_hover.png')
+    this.load.image('buyButtonPressed', uiRoute + 'buy_button_pressed.png')
+    this.load.image('buyButtonDisabled', uiRoute + 'buy_button_disabled.png')
+    this.load.image('timeBox', uiRoute + 'time_box.png')
+    this.load.image('hireButton', uiRoute + 'hire_button.png')
+    this.load.image('hireButtonHover', uiRoute + 'hire_button_hover.png')
+    this.load.image('hireButtonPressed', uiRoute + 'hire_button_pressed.png')
+    this.load.image('hireButtonDisabled', uiRoute + 'hire_button_disabled.png')
+    this.load.image('managerBG', uiRoute + 'manager_bg.png')
+
+
+    // load characters
+    const characterRoute = `${urlBase}assets/sprites/characters/`
+    this.load.spritesheet('dwarf1', characterRoute + 'dwarf1.png', {
+      frameWidth: 52,
+      frameHeight: 72
+    })
+    this.load.spritesheet('dwarf2', characterRoute + 'dwarf2.png', {
+      frameWidth: 52,
+      frameHeight: 72
+    })
+
     // load icons
     const iconsRoute = `${urlBase}assets/sprites/business/`
-    this.load.image('lemonade', iconsRoute + 'Lemonade_Stand.png')
-    this.load.image('newspaper', iconsRoute + 'Newspaper_Delivery.png')
-    this.load.image('car', iconsRoute + 'Car_Wash.png')
-    this.load.image('pizza', iconsRoute + 'Pizza_Delivery.png')
-    this.load.image('donut', iconsRoute + 'Donut_Shop.png')
-    this.load.image('shrimp', iconsRoute + 'Shrimp_Boat.png')
-    this.load.image('hockey', iconsRoute + 'Hockey_Team.png')
-    this.load.image('movie', iconsRoute + 'Movie_Studio.png')
-    this.load.image('bank', iconsRoute + 'Bank.png')
-    this.load.image('oil', iconsRoute + 'Oil_Company.png')
-
+    this.load.image('mines', iconsRoute + 'mines.png')
+    this.load.image('drill', iconsRoute + 'drill.png')
+    this.load.image('tavern', iconsRoute + 'tavern.png')
+    this.load.image('forge', iconsRoute + 'forge.png')
+    this.load.image('jewelery', iconsRoute + 'jewelery.png')
+    this.load.image('trade', iconsRoute + 'trade.png')
+    this.load.image('castle', iconsRoute + 'castle.png')
+    this.load.image('army', iconsRoute + 'army.png')
+    this.load.image('quest', iconsRoute + 'coin.png')
+    
+    this.load.image('coin', iconsRoute + 'coin.png')
 
     // load fonts
     this.load.bitmapFont(this.fonts.BM_keney.font, urlBase + 'assets/fonts/keneyFont_0.png', urlBase + 'assets/fonts/keneyFont.fnt')

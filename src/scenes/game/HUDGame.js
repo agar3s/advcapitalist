@@ -9,14 +9,14 @@ export default class HUDGameScene extends Scene {
     super.create(params)
     this.sceneManager.addGameScene(this.scene.key)
 
-    this.pause = this.createButton({
+    /*this.pause = this.createButton({
       x: 50,
       y: 50,
       text: this.getText('pause'),
       onClick: self => {
         this.sceneManager.overlay('pauseScene')
       }
-    })
+    })*/
 
     this.titleText.y += 20
     this.titleText.x += 20

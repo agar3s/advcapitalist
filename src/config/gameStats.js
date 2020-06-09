@@ -13,8 +13,8 @@ let stats = {
   },
   businesses: [
     {
-      business: 'Lemonade Stand',
-      icon: 'lemonade',
+      business: 'Miner',
+      icon: 'mines',
       cost: 373.8,
       coefficient: 1.07,
       time: 0.6,
@@ -22,8 +22,8 @@ let stats = {
       investments: 1
     },
     {
-      business: 'Newspaper Delivery',
-      icon: 'newspaper',
+      business: 'Drill',
+      icon: 'drill',
       cost: 6000,
       coefficient: 1.15,
       time: 3,
@@ -31,8 +31,8 @@ let stats = {
       investments: 0
     },
     {
-      business: 'Car Wash',
-      icon: 'car',
+      business: 'Tavern',
+      icon: 'tavern',
       cost: 72000,
       coefficient: 1.14,
       time: 6,
@@ -40,8 +40,8 @@ let stats = {
       investments: 0
     },
     {
-      business: 'Pizza Delivery',
-      icon: 'pizza',
+      business: 'Forge',
+      icon: 'forge',
       cost: 864000,
       coefficient: 1.13,
       time: 12,
@@ -49,8 +49,8 @@ let stats = {
       investments: 0
     },
     {
-      business: 'Donut Shop',
-      icon: 'donut',
+      business: 'Jewelery',
+      icon: 'jewelery',
       cost: 10368000,
       coefficient: 1.12,
       time: 24,
@@ -58,8 +58,8 @@ let stats = {
       investments: 0
     },
     {
-      business: 'Shrimp Boat',
-      icon: 'shrimp',
+      business: 'Trade',
+      icon: 'trade',
       cost: 124416000,
       coefficient: 1.11,
       time: 96,
@@ -67,8 +67,8 @@ let stats = {
       investments: 0
     },
     {
-      business: 'Hockey Team',
-      icon: 'hockey',
+      business: 'Castle',
+      icon: 'castle',
       cost: 1492992000,
       coefficient: 1.10,
       time: 384,
@@ -76,8 +76,8 @@ let stats = {
       investments: 0
     },
     {
-      business: 'Movie Studio',
-      icon: 'movie',
+      business: 'Army',
+      icon: 'army',
       cost: 17915904000,
       coefficient: 1.09,
       time: 1536,
@@ -85,21 +85,12 @@ let stats = {
       investments: 0
     },
     {
-      business: 'Bank',
-      icon: 'bank',
+      business: 'Quest',
+      icon: 'quest',
       cost: 214990848000,
       coefficient: 1.08,
       time: 6144,
       revenue: 1074954240,
-      investments: 0
-    },
-    {
-      business: 'Oil Company',
-      icon: 'oil',
-      cost: 2579890176000,
-      coefficient: 1.07,
-      time: 36864,
-      revenue: 2966873702400,
       investments: 0
     }
   ]

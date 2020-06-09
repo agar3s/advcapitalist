@@ -8,7 +8,7 @@
 */
 
 const ZOOM = 1
-const BACKGROUND_COLOR = 0x000
+const BACKGROUND_COLOR = 0x645246
 
 // time in milliseconds to keep visible the "splash" scene
 const TIME_SPLASH = 200
@@ -26,10 +26,10 @@ const DISPLAY_SCENE_TITLE = false
 const FAKE_LOADER_ACTIVE = false
 
 // display stats
-const RUNNING_STATS = true
+const RUNNING_STATS = false
 
 // display dat.gui plugin
-const DAT_GUI_ENABLE = true
+const DAT_GUI_ENABLE = false
 
 const AFTER_BOOT_SCENE = 'gameScene'
 
