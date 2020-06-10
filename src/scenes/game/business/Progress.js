@@ -51,7 +51,7 @@ export default class Icon extends Phaser.GameObjects.Container {
 
   updateRevenueText (text) {
     this.revenueLabel.text = formatter.format(text)
-    if (this.auto) this.revenueLabel.text += ' per second'
+    if (this.auto) this.revenueLabel.text += ' /sec'
   }
 
   updateProgress (percentage) {

@@ -52,7 +52,7 @@ const BUSINESSES = {
     coefficient: 1.15,
     time: 3,
     revenue: 6000,
-    managerCost: 100000,
+    managerCost: 1500000,
     managerKey: 'dwarf2',
     managerIndex: 51
   },
@@ -63,7 +63,7 @@ const BUSINESSES = {
     coefficient: 1.14,
     time: 6,
     revenue: 54000,
-    managerCost: 100000,
+    managerCost: 10000000,
     managerKey: 'dwarf1',
     managerIndex: 54
   },
@@ -74,7 +74,7 @@ const BUSINESSES = {
     coefficient: 1.13,
     time: 12,
     revenue: 432000,
-    managerCost: 100000,
+    managerCost: 50000000,
     managerKey: 'dwarf2',
     managerIndex: 0
   },
@@ -85,7 +85,7 @@ const BUSINESSES = {
     coefficient: 1.12,
     time: 24,
     revenue: 5184000,
-    managerCost: 100000,
+    managerCost: 120000000,
     managerKey: 'dwarf2',
     managerIndex: 6
   },
@@ -96,7 +96,7 @@ const BUSINESSES = {
     coefficient: 1.11,
     time: 96,
     revenue: 62208000,
-    managerCost: 100000,
+    managerCost: 1000000000,
     managerKey: 'dwarf1',
     managerIndex: 6
   },
@@ -107,7 +107,7 @@ const BUSINESSES = {
     coefficient: 1.10,
     time: 384,
     revenue: 746496000,
-    managerCost: 100000,
+    managerCost: 11111111100,
     managerKey: 'dwarf2',
     managerIndex: 57
   },
@@ -118,7 +118,7 @@ const BUSINESSES = {
     coefficient: 1.09,
     time: 1536,
     revenue: 8954952000,
-    managerCost: 100000,
+    managerCost: 55555555500,
     managerKey: 'dwarf2',
     managerIndex: 3
   },
@@ -129,9 +129,62 @@ const BUSINESSES = {
     coefficient: 1.08,
     time: 6144,
     revenue: 1074954240,
-    managerCost: 100000,
+    managerCost: 1000000000000,
     managerKey: 'dwarf2',
     managerIndex: 54
+  }
+}
+
+const MANAGERS = {
+  MINER_A: {
+    name: 'Thorjbun',
+    spriteKey: 'dwarf1',
+    spriteIndex: 0,
+  },
+  DRILL_A: {
+    name: 'Thorjbun',
+    spriteKey: 'dwarf2',
+    spriteIndex: 51,
+  },
+  DRILL_B: {
+    name: 'Thorjbun',
+    spriteKey: 'dwarf1',
+    spriteIndex: 9,
+  },
+  TAVERN_A: {
+    name: 'Thorjbun',
+    spriteKey: 'dwarf2',
+    spriteIndex: 54,
+  },
+  FORGE_A: {
+    name: 'Thorjbun',
+    spriteKey: 'dwarf2',
+    spriteIndex: 0,
+  },
+  JEWELERY_A: {
+    name: 'Thorjbun',
+    spriteKey: 'dwarf2',
+    spriteIndex: 6,
+  },
+  TRADE_A: {
+    name: 'Thorjbun',
+    spriteKey: 'dwarf1',
+    spriteIndex: 6,
+  },
+  CASTLE_A: {
+    name: 'Thorjbun',
+    spriteKey: 'dwarf2',
+    spriteIndex: 57,
+  },
+  ARMY_A: {
+    name: 'Thorjbun',
+    spriteKey: 'dwarf2',
+    spriteIndex: 3,
+  },
+  QUEST_A: {
+    name: 'Thorjbun',
+    spriteKey: 'dwarf2',
+    spriteIndex: 54,
   }
 }
 

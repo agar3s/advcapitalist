@@ -134,6 +134,14 @@ export default class BootScene extends Scene {
       frameWidth: 52,
       frameHeight: 72
     })
+    this.load.spritesheet('dwarf1_emote', characterRoute + 'dwarf1_emote.png', {
+      frameWidth: 52,
+      frameHeight: 72
+    })
+    this.load.spritesheet('dwarf2_emote', characterRoute + 'dwarf2_emote.png', {
+      frameWidth: 52,
+      frameHeight: 72
+    })
 
     // load icons
     const iconsRoute = `${urlBase}assets/sprites/business/`

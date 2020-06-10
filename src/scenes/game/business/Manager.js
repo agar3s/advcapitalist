@@ -55,9 +55,20 @@ export default class Manager extends Phaser.GameObjects.Container {
     this.managerBg = params.scene.add.image(this.anchor.x, this.anchor.y, 'managerBG')
     this.managerBg.setOrigin(0).setInteractive({ useHandCursor: true }).setVisible(this.hasManager)
     this.add(this.managerBg)
+    
     this.managerSprite = params.scene.add.sprite(this.managerBg.width/2, this.managerBg.height/2 - 4, params.managerKey, params.managerIndex)
     this.managerSprite.setVisible(this.hasManager)
     this.add(this.managerSprite)
+
+    let frameIni = params.managerIndex + 0
+    params.scene.anims.create({
+      key: `idle-${'dwarf1_emote'}-${frameIni}`,
+      frames: params.scene.anims.generateFrameNumbers('dwarf1_emote', { frames: [ frameIni, frameIni + 1] }),
+      frameRate: 5,
+      repeat: -1
+    })
+    this.managerSprite.play(`idle-${'dwarf1_emote'}-${frameIni}`)
+
   }
 
   setEnabled(enabled) {
