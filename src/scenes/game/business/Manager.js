@@ -53,7 +53,6 @@ export default class Manager extends Phaser.GameObjects.Container {
     this.add(this.managerBg)
     this.managerSprite = params.scene.add.sprite(this.managerBg.width/4, this.managerBg.height/4 - 2, params.managerKey, params.managerIndex)
     this.managerSprite.setScale(0.5).setVisible(this.hasManager)
-    console.log(this.managerSprite)
     this.add(this.managerSprite)
   }
 

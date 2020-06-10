@@ -1,4 +1,9 @@
 
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
 export default class Icon extends Phaser.GameObjects.Container {
 
   constructor (params) {
@@ -32,14 +37,15 @@ export default class Icon extends Phaser.GameObjects.Container {
     )
     this.revenueLabel.setOrigin(0.5, 0)
     this.add(this.revenueLabel)
-
+    this.auto = false
   }
 
-  updateRevenueText(text) {
-    this.revenueLabel.text = text
+  updateRevenueText (text) {
+    this.revenueLabel.text = formatter.format(text)
+    if (this.auto) this.revenueLabel.text += ' per second'
   }
 
-  updateProgress(percentage) {
+  updateProgress (percentage) {
     if (percentage < 0) {
       percentage = 1.0
     }
@@ -51,5 +57,10 @@ export default class Icon extends Phaser.GameObjects.Container {
       -172*percentage,
       15
     )
+  }
+
+  setAuto () {
+    this.auto = true
+    this.shape.clear()
   }
 }

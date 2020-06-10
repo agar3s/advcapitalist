@@ -37,6 +37,9 @@ export default class Business extends Phaser.GameObjects.Container {
     this.managerCost = params.managerCost
     this.locked = params.investments == 0
 
+    // ui variables
+    this.updateTimers = true
+
     let bg = params.scene.add.sprite(20, 0, 'businessBg')
     bg.setOrigin(0)
     bg.setScale(0.5)
@@ -57,7 +60,7 @@ export default class Business extends Phaser.GameObjects.Container {
       x: 105,
       y: 10
     })
-    this.progressBar.updateRevenueText(formatter.format(this.revenue*this.investments*0.01))
+    this.progressBar.updateRevenueText(this.revenue*this.investments*0.01)
     this.add(this.progressBar)
 
     // invest button
@@ -129,9 +132,11 @@ export default class Business extends Phaser.GameObjects.Container {
     this.updateCost()
     this.checkUnlock()
     this.icon.updateInvestmentLabel(this.investments, unlockValues[this.nextUnlockIndex], unlockValues[this.nextUnlockIndex-1]||0)
-    this.productivity = this.revenue*this.investments / this.initialTime
-    
-    this.progressBar.updateRevenueText(formatter.format(this.revenue*this.investments*0.01))
+    this.productivity = this.revenue*this.investments*this.speed / this.initialTime
+
+    let revenueText = this.updateTimers ? (this.revenue*this.investments*0.01) : (this.productivity*10)
+    this.progressBar.updateRevenueText(revenueText)
+
     if (this.investments == 1) {
       this.setLocked(false)
     }
@@ -139,6 +144,7 @@ export default class Business extends Phaser.GameObjects.Container {
 
   hireManager () {
     this.manager = true
+    this.checkProgressBarUpdate()
     this.managerContainer.setHasManager(true)
     this.produce()
   }
@@ -152,11 +158,22 @@ export default class Business extends Phaser.GameObjects.Container {
     if (this.investments != unlockValues[this.nextUnlockIndex]) return
     this.nextUnlockIndex += 1
     this.speed *= 2
+    this.checkProgressBarUpdate()
   }
 
   checkCosts(money) {
     this.investButton.setEnabled(money>=this.cost)
     this.managerContainer.setEnabled(money>=this.managerCost)
+  }
+
+  checkProgressBarUpdate() {
+    if (!this.updateTimers) return
+    this.updateTimers = !this.manager || (this.initialTime/this.speed) > 250
+
+    if (!this.updateTimers) {
+      this.timeContainer.updateTime(0)
+      this.progressBar.setAuto()
+    }
   }
 
   /**
@@ -167,9 +184,12 @@ export default class Business extends Phaser.GameObjects.Container {
     if (!this.producing) return
     this.time -= dt*this.speed
 
-    this.timeContainer.updateTime(this.time / this.speed)
+    // update timers
+    if (this.updateTimers) {
+      this.timeContainer.updateTime(this.time / this.speed)
+      this.progressBar.updateProgress(this.time/this.initialTime)
+    }
 
-    this.progressBar.updateProgress(this.time/this.initialTime)
     if (this.time < 0) {
       this.earnMoney(-this.time)
     }

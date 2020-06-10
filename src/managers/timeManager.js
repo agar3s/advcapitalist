@@ -1,5 +1,5 @@
 
-const RefreshRatio = 1000/30;
+const RefreshRatio = 20;
 
 class Time {
   constructor() {
