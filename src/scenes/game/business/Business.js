@@ -4,6 +4,7 @@ import Progress from './Progress'
 import Invest from './Invest'
 import Time from './Time'
 import Manager from './Manager'
+import getTimeManager from '../../../managers/TimeManager'
 
 import gs from '../../../config/gameStats'
 
@@ -92,6 +93,8 @@ export default class Business extends Phaser.GameObjects.Container {
     })
     this.add(this.managerContainer)
     this.setLocked(this.locked)
+
+    getTimeManager().addSubscriber(this)
   }
   
   setLocked(locked) {
@@ -102,19 +105,20 @@ export default class Business extends Phaser.GameObjects.Container {
     this.managerContainer.visible = !this.locked
   }
 
-  produce () {
+  produce (overTime = 0) {
     if (this.producing) return
     this.producing = true
-    this.time = this.initialTime
+    this.time = this.initialTime - overTime
   }
 
-  earnMoney () {
+  // overTime if runs on idle mode // minimized
+  earnMoney (overTime) {
     this.time = 0
     this.producing = false
     this.emit('moneyEarned', this.revenue*this.investments)
 
     if (this.manager) {
-      this.produce()
+      this.produce(overTime)
     }
   }
 
@@ -156,9 +160,9 @@ export default class Business extends Phaser.GameObjects.Container {
   }
 
   /**
-  * Update
+  * Update handle by time manager 
   */
-  update (dt) {
+  updateIdle (dt) {
     this.checkCosts(gs.stats.game.money)
     if (!this.producing) return
     this.time -= dt*this.speed
@@ -167,7 +171,7 @@ export default class Business extends Phaser.GameObjects.Container {
 
     this.progressBar.updateProgress(this.time/this.initialTime)
     if (this.time < 0) {
-      this.earnMoney()
+      this.earnMoney(-this.time)
     }
   }
 

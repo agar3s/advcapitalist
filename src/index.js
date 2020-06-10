@@ -16,6 +16,8 @@ import PauseScene from './scenes/ui/pause'
 
 import getSceneManager from './managers/sceneManager'
 import getDataManager from './managers/dataManager'
+import getTimeManager from './managers/TimeManager'
+
 
 import gs from './config/gameStats'
 import tunner from './utils/tunner'
@@ -47,6 +49,7 @@ window.game = new Phaser.Game({
 // init managers
 getSceneManager(window.game.scene)
 getDataManager()
+getTimeManager().start()
 
 setTimeout(() => {
   document.querySelector('canvas').focus()

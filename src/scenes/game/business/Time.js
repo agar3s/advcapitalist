@@ -37,6 +37,7 @@ export default class Time extends Phaser.GameObjects.Container {
   }
 
   updateTime (time) {
+    if (time < 0) time = 0
     this.timeLabel.text = parseTime(time)
   }
 

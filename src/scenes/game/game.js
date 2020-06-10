@@ -124,10 +124,6 @@ export default class GameScene extends Scene {
 
   update (time, dt) {
     super.update(time, dt)
-
-    this.businesses.forEach( business => {
-      business.update(dt)
-    })
   }
 
   /**
