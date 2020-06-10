@@ -43,15 +43,14 @@ export default class Business extends Phaser.GameObjects.Container {
     this.evaluateUpdateTimers();
     this.locked = gs.bs[this.key].investments == 0
 
-    let bg = params.scene.add.sprite(20, 0, 'businessBg')
+    let bg = params.scene.add.sprite(10, 0, 'businessBg')
     bg.setOrigin(0)
-    bg.setScale(0.5)
     this.add(bg)
 
     this.icon = new Icon({
       scene: params.scene,
-      x: 30,
-      y: 5,
+      x: 60,
+      y: 10,
       icon: params.icon
     })
     this.add(this.icon)
@@ -60,8 +59,8 @@ export default class Business extends Phaser.GameObjects.Container {
 
     this.progressBar = new Progress({
       scene: params.scene,
-      x: 105,
-      y: 10,
+      x: 210,
+      y: 20,
       auto: gs.bs[this.key].manager
     })
     this.progressBar.updateRevenueText(this.baseRevenue*gs.bs[this.key].investments*0.01)
@@ -70,8 +69,8 @@ export default class Business extends Phaser.GameObjects.Container {
     // invest button
     this.investButton = new Invest({
       scene: params.scene,
-      x: 105,
-      y: 35
+      x: 210,
+      y: 70
     })
     this.investButton.on('invest', _ => {
       this.emit('investIntent')
@@ -82,16 +81,16 @@ export default class Business extends Phaser.GameObjects.Container {
     // remaining time label
     this.timeContainer = new Time({
       scene: params.scene,
-      x: 220,
-      y: 40
+      x: 440,
+      y: 80
     })
     this.add(this.timeContainer)
 
     // investor avatar
     this.managerContainer = new Manager({
       scene: params.scene,
-      x: 280,
-      y: 16,
+      x: 530,
+      y: 32,
       businessKey: params.key,
       managerKey: params.managerKey,
       managerIndex: params.managerIndex

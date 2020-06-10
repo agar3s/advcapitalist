@@ -8,19 +8,19 @@ export default class Invest extends Phaser.GameObjects.Container {
     this.enabled = true
 
     this.investButton = params.scene.add.image(anchor.x, anchor.y, 'buyButton')
-    this.investButton.setScale(0.5).setOrigin(0).setInteractive({ useHandCursor: true })
+    this.investButton.setOrigin(0).setInteractive({ useHandCursor: true })
     this.add(this.investButton)
 
     this.investButtonHover = params.scene.add.image(anchor.x, anchor.y, 'buyButtonHover')
-    this.investButtonHover.setScale(0.5).setOrigin(0).setVisible(false)
+    this.investButtonHover.setOrigin(0).setVisible(false)
     this.add(this.investButtonHover)
 
     this.investButtonPressed = params.scene.add.image(anchor.x, anchor.y, 'buyButtonPressed')
-    this.investButtonPressed.setScale(0.5).setOrigin(0).setVisible(false)
+    this.investButtonPressed.setOrigin(0).setVisible(false)
     this.add(this.investButtonPressed)
 
     this.investButtonDisabled = params.scene.add.image(anchor.x, anchor.y, 'buyButtonDisabled')
-    this.investButtonDisabled.setScale(0.5).setOrigin(0).setVisible(false)
+    this.investButtonDisabled.setOrigin(0).setVisible(false)
     this.add(this.investButtonDisabled)
 
     this.investButton.on('pointerdown', _ => {
@@ -44,31 +44,31 @@ export default class Invest extends Phaser.GameObjects.Container {
     this.setEnabled(!!params.enabled)
 
     this.buyLabel = params.scene.add.text(
-      anchor.x + 8,
-      anchor.y + 16,
+      anchor.x + 20,
+      anchor.y + 36,
       'BUY X1',
       {
-        fontFamily: 'CalvertMT',
-        fontSize: 12,
+        fontFamily: 'CalvertMT-Bold',
+        fontSize: '20px',
         align: 'left',
         color: '#fff'
       }
     )
-    this.buyLabel.setOrigin(0, 0.5)
+    this.buyLabel.setOrigin(0, 0.5).setStroke('#000', 6);
     this.add(this.buyLabel)
 
     this.costLabel = params.scene.add.text(
-      anchor.x + 100,
-      anchor.y + 16,
+      anchor.x + 210,
+      anchor.y + 36,
       '',
       {
-        fontFamily: 'CalvertMT',
-        fontSize: 10,
+        fontFamily: 'CalvertMT-Bold',
+        fontSize: '18px',
         align: 'right',
         color: '#fff'
       }
     )
-    this.costLabel.setOrigin(1, 0.5)
+    this.costLabel.setOrigin(1, 0.5).setStroke('#000', 6)
     this.add(this.costLabel)
   }
 

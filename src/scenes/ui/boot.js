@@ -18,50 +18,60 @@ export default class BootScene extends Scene {
 
     let width = this.cameras.main.width
     let height = this.cameras.main.height
-    let loadingText = this.make.text({
-      x: width / 2,
-      y: height / 2 - 30,
-      text: 'Loading...',
-      style: {
-        font: '30px monospace',
-        fill: '#ffffff'
+
+    let loadingText = this.add.text(
+      width / 2,
+      height / 2 - 100,
+      'LOADING...',
+      {
+        fontFamily: 'CalvertMT-Bold',
+        color: '#fff',
+        align: 'center',
+        fontSize: '56px',
       }
-    })
+    )
+    loadingText.setStroke('#000', 6)
     loadingText.setOrigin(0.5, 0.5)
 
-    let percentText = this.make.text({
-      x: width / 2,
-      y: height / 2 + 25,
-      text: '0%',
-      style: {
-        font: '20px monospace',
-        fill: '#999999'
+    let percentText = this.add.text(
+      width / 2,
+      height / 2 - 10,
+      '0%',
+      {
+        fontFamily: 'CalvertMT-Bold',
+        color: '#fff',
+        align: 'center',
+        fontSize: '32px',
       }
-    })
+    )
+    percentText.setStroke('#000', 4);
     percentText.setOrigin(0.5, 0.5)
 
-    let assetText = this.make.text({
-      x: width / 2,
-      y: height / 2 + 65,
-      text: '',
-      style: {
-        font: '18px monospace',
-        fill: '#ffffff'
+    let assetText = this.add.text(
+      width / 2,
+      height / 2 + 70,
+      '',
+      {
+        fontFamily: 'CalvertMT-Bold',
+        color: '#fff',
+        align: 'center',
+        fontSize: '36px',
       }
-    })
+    )
+    assetText.setStroke('#000000', 4);
     assetText.setOrigin(0.5, 0.5)
 
     progressBox.fillStyle(0x666666, 1)
-    progressBox.fillRect(width / 2 - 160, height / 2, 320, 50)
+    progressBox.fillRect(width / 2 - 300, height / 2 - 60, 600, 100)
 
     this.load.on('progress', value => {
       progressBar.clear()
       progressBar.fillStyle(0x333333, 1)
       progressBar.fillRect(
-        width / 2 + 10 - 160,
-        height / 2 + 10,
-        300 * value,
-        30
+        width / 2 + 10 - 300,
+        height / 2 - 50,
+        580 * value,
+        80
       )
       percentText.setText(parseInt(value * 100) + '%')
     })

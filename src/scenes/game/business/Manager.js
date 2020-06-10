@@ -17,19 +17,19 @@ export default class Manager extends Phaser.GameObjects.Container {
 
   createButtons(params) {
     this.hireManagerButton = params.scene.add.image(this.anchor.x, this.anchor.y, 'hireButton')
-    this.hireManagerButton.setScale(0.5).setOrigin(0).setInteractive({ useHandCursor: true })
+    this.hireManagerButton.setOrigin(0).setInteractive({ useHandCursor: true })
     this.add(this.hireManagerButton)
 
     this.hireManagerButtonHover = params.scene.add.image(this.anchor.x, this.anchor.y, 'hireButtonHover')
-    this.hireManagerButtonHover.setScale(0.5).setOrigin(0).setVisible(false)
+    this.hireManagerButtonHover.setOrigin(0).setVisible(false)
     this.add(this.hireManagerButtonHover)
 
     this.hireManagerButtonPressed = params.scene.add.image(this.anchor.x, this.anchor.y, 'hireButtonPressed')
-    this.hireManagerButtonPressed.setScale(0.5).setOrigin(0).setVisible(false)
+    this.hireManagerButtonPressed.setOrigin(0).setVisible(false)
     this.add(this.hireManagerButtonPressed)
 
     this.hireManagerButtonDisabled = params.scene.add.image(this.anchor.x, this.anchor.y, 'hireButtonDisabled')
-    this.hireManagerButtonDisabled.setScale(0.5).setOrigin(0).setVisible(false)
+    this.hireManagerButtonDisabled.setOrigin(0).setVisible(false)
     this.add(this.hireManagerButtonDisabled)
 
     this.hireManagerButton.on('pointerdown', _ => {
@@ -53,10 +53,10 @@ export default class Manager extends Phaser.GameObjects.Container {
 
   createPortrait(params) {
     this.managerBg = params.scene.add.image(this.anchor.x, this.anchor.y, 'managerBG')
-    this.managerBg.setScale(0.5).setOrigin(0).setInteractive({ useHandCursor: true }).setVisible(this.hasManager)
+    this.managerBg.setOrigin(0).setInteractive({ useHandCursor: true }).setVisible(this.hasManager)
     this.add(this.managerBg)
-    this.managerSprite = params.scene.add.sprite(this.managerBg.width/4, this.managerBg.height/4 - 2, params.managerKey, params.managerIndex)
-    this.managerSprite.setScale(0.5).setVisible(this.hasManager)
+    this.managerSprite = params.scene.add.sprite(this.managerBg.width/2, this.managerBg.height/2 - 4, params.managerKey, params.managerIndex)
+    this.managerSprite.setVisible(this.hasManager)
     this.add(this.managerSprite)
   }
 

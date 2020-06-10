@@ -18,21 +18,21 @@ export default class Time extends Phaser.GameObjects.Container {
     let anchor = { x: 0, y: 0 }
 
     let timeBg = params.scene.add.sprite(anchor.x, anchor.y, 'timeBox')
-    timeBg.setOrigin(0).setScale(0.5)
+    timeBg.setOrigin(0)
     this.add(timeBg)
 
     this.timeLabel = params.scene.add.text(
-      anchor.x + timeBg.width/4,
-      anchor.y + timeBg.height/4 - 2,
+      anchor.x + timeBg.width/2,
+      anchor.y + timeBg.height/2 - 4,
       ``,
       {
-        fontFamily: 'CalvertMT',
-        fontSize: 10,
+        fontFamily: 'CalvertMT-Bold',
+        fontSize: '18px',
         align: 'center',
         color: '#fff'
       }
     )
-    this.timeLabel.setOrigin(0.5)
+    this.timeLabel.setOrigin(0.5).setStroke('#000', 4)
     this.add(this.timeLabel)
   }
 

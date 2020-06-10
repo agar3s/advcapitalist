@@ -10,12 +10,10 @@ export default class Icon extends Phaser.GameObjects.Container {
     super(params.scene, params.x, params.y)
 
     let progressLoadBar = params.scene.add.sprite(0, 0, 'progressLoadBar')
-    progressLoadBar.setScale(0.5)
     progressLoadBar.setOrigin(0)
     this.add(progressLoadBar)
 
     let progressFillBar = params.scene.add.sprite(0, 0, 'progressFillBar')
-    progressFillBar.setScale(0.5)
     progressFillBar.setOrigin(0)
     this.add(progressFillBar)
 
@@ -24,17 +22,17 @@ export default class Icon extends Phaser.GameObjects.Container {
 
 
     this.revenueLabel = params.scene.add.text(
-      86,
-      0,
+      172,
+      2,
       '',
       {
-        fontFamily: '18px Calvert bold',
-        fontSize: 12,
+        fontFamily: 'CalvertMT-Bold',
+        fontSize: '20px',
         align: 'center',
         color: '#fff'
       }
     )
-    this.revenueLabel.setOrigin(0.5, 0)
+    this.revenueLabel.setOrigin(0.5, 0).setStroke('#000000', 6)
     this.add(this.revenueLabel)
     this.auto = params.auto
     if (!this.auto) this.updateProgress(1.0)
@@ -52,10 +50,10 @@ export default class Icon extends Phaser.GameObjects.Container {
     this.shape.clear()
     this.shape.fillStyle(0x22272e, 1)
     this.shape.fillRect(
-      172,
-      1,
-      -172*percentage,
-      15
+      344,
+      2,
+      -344*percentage,
+      30
     )
   }
 

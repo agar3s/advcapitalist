@@ -136,8 +136,8 @@ const BUSINESSES = {
 }
 
 export default {
-  WIDTH: 360,
-  HEIGHT: 640,
+  WIDTH: 640,
+  HEIGHT: 1280,
   ZOOM,
   BACKGROUND_COLOR,
   FAKE_LOADER_ACTIVE,

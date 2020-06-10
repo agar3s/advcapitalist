@@ -33,20 +33,21 @@ export default class GameScene extends Scene {
     this.events.on('resume', _ => this.resume(), this)
 
     this.label = this.add.text(
-      160,
-      20,
+      320,
+      40,
       'a sample text',
       {
-        fontFamily: '18px Calvert bold',
-        fontSize: 22,
+        fontFamily: 'CalvertMT-Bold',
         color: '#fff',
         align: 'center',
-        wordWrap: { width: this.background_width - 128 }
+        fontSize: '64px',
+        wordWrap: { width: this.background_width - 256 }
       }
     )
+    this.label.setStroke('#000000', 8)
     this.label.setOrigin(0.5)
 
-    this.cameras.main.setSize(360, 1200);
+    this.cameras.main.setSize(640, 1280);
     this.setupBusinesses()
 
 
@@ -78,7 +79,7 @@ export default class GameScene extends Scene {
       let businessObject = new Business({
         scene: this,
         x: 0,
-        y: (index+1)*100,
+        y: (index+1)*200,
         key,
         ...constants.BUSINESSES[key]
       })
