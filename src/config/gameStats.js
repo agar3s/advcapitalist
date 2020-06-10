@@ -1,11 +1,11 @@
+import utils from '../utils/utils'
 
 // base game stats
 let stats = {
   game: {
-    backgroundColor: '#000',
     language: 'en',
-    debug: false,
-    money: 0
+    money: 0,
+    id: utils.uuidv4()
   },
   scene: {
     restart: false,
