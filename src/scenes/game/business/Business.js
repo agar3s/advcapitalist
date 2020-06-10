@@ -110,7 +110,6 @@ export default class Business extends Phaser.GameObjects.Container {
   calculateIdleAway() {
     let stats = gs.bs[this.key]
     if (!stats.producing) return 0
-
     // if not manager calculate how much time has passed
     let time = (+new Date() - stats.timeTriggered)
     let baseTime = this.baseTime / stats.speed
@@ -140,6 +139,7 @@ export default class Business extends Phaser.GameObjects.Container {
 
   produce (overTime = 0) {
     if (gs.bs[this.key].producing) return
+    gs.bs[this.key].timeTriggered = +new Date()
     gs.bs[this.key].producing = true
     this.time = this.baseTime - overTime
   }
