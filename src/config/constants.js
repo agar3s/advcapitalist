@@ -32,6 +32,108 @@ const RUNNING_STATS = false
 const DAT_GUI_ENABLE = false
 
 const AFTER_BOOT_SCENE = 'gameScene'
+const BUSINESS_KEYS = ['MINER', 'DRILL', 'TAVERN', 'FORGE', 'JEWELERY', 'TRADE', 'CASTLE', 'ARMY', 'QUEST']
+const BUSINESSES = {
+  MINER: {
+    business: 'Mines',
+    icon: 'mines',
+    cost: 373.8,
+    coefficient: 1.07,
+    time: 0.6,
+    revenue: 100,
+    managerCost: 100000,
+    managerKey: 'dwarf1',
+    managerIndex: 0
+  },
+  DRILL: {
+    business: 'Drill',
+    icon: 'drill',
+    cost: 6000,
+    coefficient: 1.15,
+    time: 3,
+    revenue: 6000,
+    managerCost: 100000,
+    managerKey: 'dwarf2',
+    managerIndex: 51
+  },
+  TAVERN: {
+    business: 'Tavern',
+    icon: 'tavern',
+    cost: 72000,
+    coefficient: 1.14,
+    time: 6,
+    revenue: 54000,
+    managerCost: 100000,
+    managerKey: 'dwarf1',
+    managerIndex: 54
+  },
+  FORGE: {
+    business: 'Forge',
+    icon: 'forge',
+    cost: 864000,
+    coefficient: 1.13,
+    time: 12,
+    revenue: 432000,
+    managerCost: 100000,
+    managerKey: 'dwarf2',
+    managerIndex: 0
+  },
+  JEWELERY: {
+    business: 'Jewelery',
+    icon: 'jewelery',
+    cost: 10368000,
+    coefficient: 1.12,
+    time: 24,
+    revenue: 5184000,
+    managerCost: 100000,
+    managerKey: 'dwarf2',
+    managerIndex: 6
+  },
+  TRADE: {
+    business: 'Trade',
+    icon: 'trade',
+    cost: 124416000,
+    coefficient: 1.11,
+    time: 96,
+    revenue: 62208000,
+    managerCost: 100000,
+    managerKey: 'dwarf1',
+    managerIndex: 6
+  },
+  CASTLE: {
+    business: 'Castle',
+    icon: 'castle',
+    cost: 1492992000,
+    coefficient: 1.10,
+    time: 384,
+    revenue: 746496000,
+    managerCost: 100000,
+    managerKey: 'dwarf2',
+    managerIndex: 57
+  },
+  ARMY: {
+    business: 'Army',
+    icon: 'army',
+    cost: 17915904000,
+    coefficient: 1.09,
+    time: 1536,
+    revenue: 8954952000,
+    managerCost: 100000,
+    managerKey: 'dwarf2',
+    managerIndex: 3
+  },
+  QUEST: {
+    business: 'Quest',
+    icon: 'quest',
+    cost: 214990848000,
+    coefficient: 1.08,
+    time: 6144,
+    revenue: 1074954240,
+    managerCost: 100000,
+    managerKey: 'dwarf2',
+    managerIndex: 54
+  }
+}
 
 export default {
   WIDTH: 360,
@@ -45,5 +147,7 @@ export default {
   RUNNING_STATS,
   DAT_GUI_ENABLE,
   AFTER_BOOT_SCENE,
+  BUSINESS_KEYS,
+  BUSINESSES,
   KEY: 'value'
 }

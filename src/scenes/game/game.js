@@ -1,6 +1,12 @@
+
 import Scene from '../scene'
 import gs from '../../config/gameStats'
+import constants from '../../config/constants'
 import Business from './business/Business'
+import getTimeManager from '../../managers/TimeManager'
+import getDataManager from '../../managers/dataManager'
+
+const SAVE_TIMEOUT = 1000;
 
 var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -16,8 +22,6 @@ export default class GameScene extends Scene {
   create (params) {
     super.create(params)
     this.id = Math.random()
-
-    //gs.stats.game.money
     
     this.sceneManager.addGameScene(this.scene.key)
     this.sceneManager.overlay('HUDGameScene')
@@ -58,16 +62,24 @@ export default class GameScene extends Scene {
       gs.setListener('mainScene.logoPosition.y', val => {})
       gs.setListener('actor.state', val => {})
     }
+
+    this.timeToSave = SAVE_TIMEOUT
+    getTimeManager().addSubscriber(this)
   }
 
   setupBusinesses () {
-    gs.stats.businesses.forEach((businessData, index) => {
+
+    const businessKeys = []
+    let idleEarnings = 0
+
+    constants.BUSINESS_KEYS.forEach((key, index) => {
 
       let businessObject = new Business({
         scene: this,
         x: 0,
         y: (index+1)*100,
-        ...businessData
+        key,
+        ...constants.BUSINESSES[key]
       })
 
       businessObject.on('moneyEarned', money => {
@@ -84,11 +96,14 @@ export default class GameScene extends Scene {
       
       this.add.existing(businessObject)
       this.businesses.push(businessObject)
+      idleEarnings += businessObject.calculateIdleAway()
     });
     
+    console.log('total earned ', idleEarnings)
+    this.addMoney(idleEarnings)
   }
 
-  addMoney(money) {
+  addMoney (money) {
     gs.set('game.money', gs.stats.game.money + money)
     //gs.stats.game.money
     //this.money += money
@@ -96,13 +111,13 @@ export default class GameScene extends Scene {
 
   }
 
-  checkInvesment(business) {
+  checkInvesment (business) {
     if (gs.stats.game.money < business.cost) return
     this.addMoney(-business.cost)
     business.invest()
   }
 
-  checkHire(business) {
+  checkHire (business) {
     if (gs.stats.game.money < business.managerCost) return
     this.addMoney(-business.managerCost)
     business.hireManager()
@@ -110,15 +125,23 @@ export default class GameScene extends Scene {
   
 
 
-  shutdown() {
+  shutdown () {
     this.events.off('shutdown')
 
     // gui
-    if(this.constants.DAT_GUI_ENABLE) {
+    if (this.constants.DAT_GUI_ENABLE) {
       gs.removeListener('mainScene.rotationRatio')
       gs.removeListener('mainScene.logoPosition.x')
       gs.removeListener('mainScene.logoPosition.y')
       gs.removeListener('actor.state')
+    }
+  }
+
+  updateIdle (dt) {
+    this.timeToSave -= dt
+    if (this.timeToSave < 0) {
+      getDataManager('dwarfEmpire').save({data: gs.stats})
+      this.timeToSave = SAVE_TIMEOUT
     }
   }
 

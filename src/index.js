@@ -22,6 +22,15 @@ import getTimeManager from './managers/TimeManager'
 import gs from './config/gameStats'
 import tunner from './utils/tunner'
 
+// load Data
+getDataManager('dwarfEmpire')
+getTimeManager().start()
+let loadedData = getDataManager('dwarfEmpire').load()
+if (loadedData) {
+  gs.setData(loadedData)
+  //gs.stats = {...gs.stats, ...loadedData}
+  console.log(gs.stats)
+}
 
 window.game = new Phaser.Game({
   type: Phaser.WEBGL,
@@ -48,8 +57,6 @@ window.game = new Phaser.Game({
 
 // init managers
 getSceneManager(window.game.scene)
-getDataManager()
-getTimeManager().start()
 
 setTimeout(() => {
   document.querySelector('canvas').focus()

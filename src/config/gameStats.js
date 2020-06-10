@@ -7,121 +7,75 @@ let stats = {
     debug: false,
     money: 0
   },
-  mainScene: { },
   scene: {
     restart: false,
     current: 'bootScene'
   },
-  businesses: [
-    {
-      business: 'Miner',
-      icon: 'mines',
-      cost: 373.8,
-      coefficient: 1.07,
-      time: 0.6,
-      revenue: 100,
+  businesses: {
+    MINER: {
       investments: 1,
-      managerCost: 100000,
-      managerKey: 'dwarf1',
-      managerIndex: 0
+      manager: false,
+      timeTriggered: -1,
+      producing: false,
+      speed: 1
     },
-    {
-      business: 'Drill',
-      icon: 'drill',
-      cost: 6000,
-      coefficient: 1.15,
-      time: 3,
-      revenue: 6000,
+    DRILL: {
       investments: 0,
-      managerCost: 100000,
-      managerKey: 'dwarf2',
-      managerIndex: 51
+      manager: false,
+      timeTriggered: -1,
+      producing: false,
+      speed: 1
     },
-    {
-      business: 'Tavern',
-      icon: 'tavern',
-      cost: 72000,
-      coefficient: 1.14,
-      time: 6,
-      revenue: 54000,
+    TAVERN: {
       investments: 0,
-      managerCost: 100000,
-      managerKey: 'dwarf1',
-      managerIndex: 54
+      manager: false,
+      timeTriggered: -1,
+      producing: false,
+      speed: 1
     },
-    {
-      business: 'Forge',
-      icon: 'forge',
-      cost: 864000,
-      coefficient: 1.13,
-      time: 12,
-      revenue: 432000,
+    FORGE: {
       investments: 0,
-      managerCost: 100000,
-      managerKey: 'dwarf2',
-      managerIndex: 0
+      manager: false,
+      timeTriggered: -1,
+      producing: false,
+      speed: 1
     },
-    {
-      business: 'Jewelery',
-      icon: 'jewelery',
-      cost: 10368000,
-      coefficient: 1.12,
-      time: 24,
-      revenue: 5184000,
+    JEWELERY: {
       investments: 0,
-      managerCost: 100000,
-      managerKey: 'dwarf2',
-      managerIndex: 6
+      manager: false,
+      timeTriggered: -1,
+      producing: false,
+      speed: 1
     },
-    {
-      business: 'Trade',
-      icon: 'trade',
-      cost: 124416000,
-      coefficient: 1.11,
-      time: 96,
-      revenue: 62208000,
+    TRADE: {
       investments: 0,
-      managerCost: 100000,
-      managerKey: 'dwarf1',
-      managerIndex: 6
+      manager: false,
+      timeTriggered: -1,
+      producing: false,
+      speed: 1
     },
-    {
-      business: 'Castle',
-      icon: 'castle',
-      cost: 1492992000,
-      coefficient: 1.10,
-      time: 384,
-      revenue: 746496000,
+    CASTLE: {
       investments: 0,
-      managerCost: 100000,
-      managerKey: 'dwarf2',
-      managerIndex: 57
+      manager: false,
+      timeTriggered: -1,
+      producing: false,
+      speed: 1
     },
-    {
-      business: 'Army',
-      icon: 'army',
-      cost: 17915904000,
-      coefficient: 1.09,
-      time: 1536,
-      revenue: 8954952000,
+    ARMY: {
       investments: 0,
-      managerCost: 100000,
-      managerKey: 'dwarf2',
-      managerIndex: 3
+      manager: false,
+      timeTriggered: -1,
+      producing: false,
+      speed: 1
     },
-    {
-      business: 'Quest',
-      icon: 'quest',
-      cost: 214990848000,
-      coefficient: 1.08,
-      time: 6144,
-      revenue: 1074954240,
+    QUEST: {
       investments: 0,
-      managerCost: 100000,
-      managerKey: 'dwarf2',
-      managerIndex: 54
+      manager: false,
+      timeTriggered: -1,
+      producing: false,
+      speed: 1
     }
-  ]
+  }
 }
 
 function getNames(property) {
@@ -195,11 +149,20 @@ let setAll = (key, data) => {
   })
 }
 
+let setData = (data) => {
+  let keys = Object.keys(data)
+  keys.forEach( key => {
+    setAll(key, data[key])
+  })
+}
+
 export default {
   stats,
+  bs: stats.businesses,
   setListener,
   removeListener,
   notifyListener,
   set,
-  setAll
+  setAll,
+  setData
 }

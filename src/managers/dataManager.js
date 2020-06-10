@@ -79,10 +79,10 @@ class DataManager {
    * @param {boolean} useHash A boolean indicating if the stored data should be verified.
    * @returns {(Object|Promise)} The stored data as an object or a Promise that will returns it.
    */
-  load(keyName, useHash) {
+  load(useHash = false) {
     // check if there's data to load
-    if (this.isThereStoredData(keyName)) {
-      const storedData = localStorage.getItem(keyName || this.localStorageKey)
+    if (this.isThereStoredData(this.localStorageKey)) {
+      const storedData = localStorage.getItem(this.localStorageKey)
 
       // check if a hash code should be verified
       if (useHash) {

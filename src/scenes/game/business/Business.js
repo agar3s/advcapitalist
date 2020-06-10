@@ -8,7 +8,7 @@ import getTimeManager from '../../../managers/TimeManager'
 
 import gs from '../../../config/gameStats'
 
-const unlockValues = [25, 50, 100, 200, 300, 400]
+const unlockValues = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 
 var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -20,25 +20,28 @@ export default class Business extends Phaser.GameObjects.Container {
   constructor (params) {
     super(params.scene, params.x, params.y)
 
-    this.producing = false
-    this.time = 0
-    this.speed = 1
-    this.initialRevenue = params.revenue || 100
-    this.revenue = this.initialRevenue
-    this.initialTime = (params.time || 0.6) * 1000
-    this.coefficient = params.coefficient || 1.07
-    this.investments = params.investments
-    this.productivity = this.initialRevenue * this.investments / this.initialTime
-    // cost in cents
-    this.initialCost = params.cost || 373.8
-    this.cost = this.initialCost
-    this.nextUnlockIndex = 0
-    this.manager = false
+    this.key = params.key
+    let fromStats = gs.bs[this.key]
+    
+    // const data
+    this.coefficient = params.coefficient
+    this.baseRevenue = params.revenue
+    this.baseTime = params.time * 1000
+    this.baseCost = params.cost
     this.managerCost = params.managerCost
-    this.locked = params.investments == 0
+    
+    // find the nextUnlock value
+    for (let i = 0; i < unlockValues.length; i++) {
+      if (gs.bs[this.key].investments< unlockValues[i]) {
+        this.nextUnlockIndex = i
+        break
+      }
+    }
 
     // ui variables
-    this.updateTimers = true
+    this.time = 0
+    this.evaluateUpdateTimers();
+    this.locked = gs.bs[this.key].investments == 0
 
     let bg = params.scene.add.sprite(20, 0, 'businessBg')
     bg.setOrigin(0)
@@ -52,7 +55,7 @@ export default class Business extends Phaser.GameObjects.Container {
       icon: params.icon
     })
     this.add(this.icon)
-    this.icon.updateInvestmentLabel(this.investments, unlockValues[this.nextUnlockIndex], unlockValues[this.nextUnlockIndex-1]||0)
+    this.icon.updateInvestmentLabel(gs.bs[this.key].investments, unlockValues[this.nextUnlockIndex], unlockValues[this.nextUnlockIndex-1]||0)
     this.icon.on('produce', this.produce, this)
 
     this.progressBar = new Progress({
@@ -60,7 +63,7 @@ export default class Business extends Phaser.GameObjects.Container {
       x: 105,
       y: 10
     })
-    this.progressBar.updateRevenueText(this.revenue*this.investments*0.01)
+    this.progressBar.updateRevenueText(this.baseRevenue*gs.bs[this.key].investments*0.01)
     this.add(this.progressBar)
 
     // invest button
@@ -98,9 +101,36 @@ export default class Business extends Phaser.GameObjects.Container {
     this.setLocked(this.locked)
 
     getTimeManager().addSubscriber(this)
+
+    // calculate new money
+    //this.time = (+new Date() - gs.bs[this.key].timeTriggered)
+    // this.calculateIdleAway()
+  }
+
+  calculateIdleAway() {
+    let stats = gs.bs[this.key]
+    if (!stats.producing) return 0
+
+    // if not manager calculate how much time has passed
+    let time = (+new Date() - stats.timeTriggered)
+    let baseTime = this.baseTime / stats.speed
+    
+    let itemsProduced = parseInt(time / baseTime)
+    let remainingTime = baseTime - (time % baseTime)
+
+    let baseEarning = this.baseRevenue*stats.investments
+
+    if (itemsProduced > 1 && !stats.manager) {
+      itemsProduced = 1
+      gs.bs[this.key].producing = false
+    }
+    if (stats.manager || itemsProduced <= 0) {
+      this.time = remainingTime
+    }
+    return itemsProduced*baseEarning
   }
   
-  setLocked(locked) {
+  setLocked (locked) {
     this.locked = locked
     this.icon.visible = !this.locked
     this.progressBar.visible = !this.locked
@@ -109,67 +139,72 @@ export default class Business extends Phaser.GameObjects.Container {
   }
 
   produce (overTime = 0) {
-    if (this.producing) return
-    this.producing = true
-    this.time = this.initialTime - overTime
+    if (gs.bs[this.key].producing) return
+    gs.bs[this.key].producing = true
+    this.time = this.baseTime - overTime
   }
 
   // overTime if runs on idle mode // minimized
   earnMoney (overTime) {
     this.time = 0
-    this.producing = false
-    this.emit('moneyEarned', this.revenue*this.investments)
+    gs.bs[this.key].producing = false
+    this.emit('moneyEarned', this.baseRevenue*gs.bs[this.key].investments)
 
-    if (this.manager) {
+    if (gs.bs[this.key].manager) {
       this.produce(overTime)
     }
   }
 
+  getProductivity() {
+    return 10*this.baseRevenue*gs.bs[this.key].investments*gs.bs[this.key].speed / this.baseTime
+  }
 
   // should validate if there is enough money to invest
   invest () {
-    this.investments += 1
+    gs.bs[this.key].investments += 1
     this.updateCost()
     this.checkUnlock()
-    this.icon.updateInvestmentLabel(this.investments, unlockValues[this.nextUnlockIndex], unlockValues[this.nextUnlockIndex-1]||0)
-    this.productivity = this.revenue*this.investments*this.speed / this.initialTime
-
-    let revenueText = this.updateTimers ? (this.revenue*this.investments*0.01) : (this.productivity*10)
+    this.icon.updateInvestmentLabel(gs.bs[this.key].investments, unlockValues[this.nextUnlockIndex], unlockValues[this.nextUnlockIndex-1]||0)
+    let revenueText = this.updateTimers ? (this.baseRevenue*gs.bs[this.key].investments*0.01) : this.getProductivity()
     this.progressBar.updateRevenueText(revenueText)
 
-    if (this.investments == 1) {
+    if (gs.bs[this.key].investments == 1) {
       this.setLocked(false)
     }
   }
 
   hireManager () {
-    this.manager = true
+    gs.bs[this.key].manager = true
     this.checkProgressBarUpdate()
     this.managerContainer.setHasManager(true)
     this.produce()
   }
 
   updateCost () {
-    this.cost = Math.round(Math.pow(this.coefficient, this.investments) * this.initialCost)
+    this.cost = Math.round(Math.pow(this.coefficient, gs.bs[this.key].investments) * this.baseCost)
     this.investButton.updateText(`${formatter.format(this.cost*0.01)}`)
   }
 
   checkUnlock() {
-    if (this.investments != unlockValues[this.nextUnlockIndex]) return
+    if (gs.bs[this.key].investments != unlockValues[this.nextUnlockIndex]) return
     this.nextUnlockIndex += 1
-    this.speed *= 2
+    gs.bs[this.key].speed *= 2
     this.checkProgressBarUpdate()
   }
 
-  checkCosts(money) {
-    this.investButton.setEnabled(money>=this.cost)
-    this.managerContainer.setEnabled(money>=this.managerCost)
+  checkCosts() {
+    this.investButton.setEnabled(gs.stats.game.money>=this.cost)
+    this.managerContainer.setEnabled(gs.stats.game.money>=this.managerCost)
+  }
+
+  evaluateUpdateTimers () {
+    this.updateTimers = !gs.bs[this.key].manager || (this.baseTime/gs.bs[this.key].speed) > 250
   }
 
   checkProgressBarUpdate() {
     if (!this.updateTimers) return
-    this.updateTimers = !this.manager || (this.initialTime/this.speed) > 250
-
+    
+    this.evaluateUpdateTimers()
     if (!this.updateTimers) {
       this.timeContainer.updateTime(0)
       this.progressBar.setAuto()
@@ -180,14 +215,15 @@ export default class Business extends Phaser.GameObjects.Container {
   * Update handle by time manager 
   */
   updateIdle (dt) {
-    this.checkCosts(gs.stats.game.money)
-    if (!this.producing) return
-    this.time -= dt*this.speed
+    this.checkCosts()
+    if (!gs.bs[this.key].producing) return
+
+    this.time -= dt*gs.bs[this.key].speed
 
     // update timers
     if (this.updateTimers) {
-      this.timeContainer.updateTime(this.time / this.speed)
-      this.progressBar.updateProgress(this.time/this.initialTime)
+      this.timeContainer.updateTime(this.time / gs.bs[this.key].speed)
+      this.progressBar.updateProgress(this.time/this.baseTime)
     }
 
     if (this.time < 0) {
