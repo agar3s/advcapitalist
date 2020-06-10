@@ -140,7 +140,7 @@ export default class GameScene extends Scene {
   updateIdle (dt) {
     this.timeToSave -= dt
     if (this.timeToSave < 0) {
-      getDataManager('dwarfEmpire').save({data: gs.stats})
+      getDataManager('dwarfEmpire').save({data: gs.stats, useHash: true})
       this.timeToSave = SAVE_TIMEOUT
     }
   }

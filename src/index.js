@@ -25,12 +25,14 @@ import tunner from './utils/tunner'
 // load Data
 getDataManager('dwarfEmpire')
 getTimeManager().start()
-let loadedData = getDataManager('dwarfEmpire').load()
-if (loadedData) {
-  gs.setData(loadedData)
-  //gs.stats = {...gs.stats, ...loadedData}
-  console.log(gs.stats)
-}
+getDataManager('dwarfEmpire').load((err, data) => {
+  if (data) {
+    gs.setData(data)
+    //gs.stats = {...gs.stats, ...loadedData}
+    console.log(gs.stats)
+  }
+  console.log(data)
+}, true)
 
 window.game = new Phaser.Game({
   type: Phaser.WEBGL,
