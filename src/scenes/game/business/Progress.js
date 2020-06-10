@@ -22,7 +22,7 @@ export default class Icon extends Phaser.GameObjects.Container {
     this.shape = params.scene.make.graphics()
     this.add(this.shape)
 
-    this.updateProgress(1.0)
+    //this.updateProgress(1.0)
 
     this.revenueLabel = params.scene.add.text(
       86,
@@ -37,7 +37,7 @@ export default class Icon extends Phaser.GameObjects.Container {
     )
     this.revenueLabel.setOrigin(0.5, 0)
     this.add(this.revenueLabel)
-    this.auto = false
+    this.auto = params.auto
   }
 
   updateRevenueText (text) {

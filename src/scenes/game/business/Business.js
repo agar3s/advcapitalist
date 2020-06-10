@@ -61,7 +61,8 @@ export default class Business extends Phaser.GameObjects.Container {
     this.progressBar = new Progress({
       scene: params.scene,
       x: 105,
-      y: 10
+      y: 10,
+      auto: gs.bs[this.key].manager
     })
     this.progressBar.updateRevenueText(this.baseRevenue*gs.bs[this.key].investments*0.01)
     this.add(this.progressBar)
@@ -91,6 +92,7 @@ export default class Business extends Phaser.GameObjects.Container {
       scene: params.scene,
       x: 280,
       y: 16,
+      businessKey: params.key,
       managerKey: params.managerKey,
       managerIndex: params.managerIndex
     })

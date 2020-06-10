@@ -1,14 +1,18 @@
 
+import gs from '../../../config/gameStats'
+
 export default class Manager extends Phaser.GameObjects.Container {
   
   constructor (params) {
     super(params.scene, params.x, params.y)
     this.anchor = {x: 0, y: 0}
     
+    this.businessKey = params.businessKey
     this.hasManager = false
     this.createButtons(params)
     this.createPortrait(params)
     this.setEnabled(!!params.enabled)
+    this.setHasManager(gs.bs[this.businessKey].manager)
   }
 
   createButtons(params) {
