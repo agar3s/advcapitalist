@@ -1,11 +1,13 @@
 import utils from '../utils/utils'
+import serverConnector from '../utils/serverConnector'
+import getDataManager from '../managers/dataManager'
 
 // base game stats
 let stats = {
+  id: utils.uuidv4(),
   game: {
     language: 'en',
     money: 0,
-    id: utils.uuidv4()
   },
   scene: {
     restart: false,
@@ -155,6 +157,32 @@ let setData = (data) => {
     setAll(key, data[key])
   })
 }
+
+// second load data from server
+let syncFromServer = () => {
+  // data loaded from database
+  serverConnector.loadGame(stats.id, (err, data) => {
+    if (data) {
+      setData(data)
+    }
+  })
+}
+
+// first load data from local manager - fallback
+let loadData = () => {
+  getDataManager('dwarfEmpire')
+  getDataManager('dwarfEmpire').load((err, data) => {
+    if (data) {
+      // data loaded from localstorage // fallback
+      setData(data)
+      stats.id = data.id
+      syncFromServer()
+    }
+  }, true)
+
+}
+
+loadData()
 
 export default {
   stats,

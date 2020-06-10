@@ -21,18 +21,11 @@ import getTimeManager from './managers/TimeManager'
 
 import gs from './config/gameStats'
 import tunner from './utils/tunner'
+import serverConnector from './utils/serverConnector'
 
 // load Data
-getDataManager('dwarfEmpire')
 getTimeManager().start()
-getDataManager('dwarfEmpire').load((err, data) => {
-  if (data) {
-    gs.setData(data)
-    //gs.stats = {...gs.stats, ...loadedData}
-    console.log(gs.stats)
-  }
-  console.log(data)
-}, true)
+
 
 window.game = new Phaser.Game({
   type: Phaser.WEBGL,

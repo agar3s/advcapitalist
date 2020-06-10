@@ -5,8 +5,9 @@ import constants from '../../config/constants'
 import Business from './business/Business'
 import getTimeManager from '../../managers/TimeManager'
 import getDataManager from '../../managers/dataManager'
+import serverConnector from '../../utils/serverConnector'
 
-const SAVE_TIMEOUT = 1000;
+const SAVE_TIMEOUT = 5000;
 
 var formatter = new Intl.NumberFormat('en-US', {
   style: 'currency',
@@ -141,8 +142,10 @@ export default class GameScene extends Scene {
     this.timeToSave -= dt
     if (this.timeToSave < 0) {
       getDataManager('dwarfEmpire').save({data: gs.stats, useHash: true})
+      serverConnector.saveGame(gs.stats)
       this.timeToSave = SAVE_TIMEOUT
     }
+
   }
 
   update (time, dt) {
