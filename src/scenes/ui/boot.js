@@ -117,6 +117,10 @@ export default class BootScene extends Scene {
     this.load.image('hireButtonPressed', uiRoute + 'hire_button_pressed.png')
     this.load.image('hireButtonDisabled', uiRoute + 'hire_button_disabled.png')
     this.load.image('managerBG', uiRoute + 'manager_bg.png')
+    this.load.spritesheet('progressSpriteBar', uiRoute + 'load_fill_bar_sprite.png', {
+      frameWidth: 344,
+      frameHeight: 34
+    })
 
 
     // load characters

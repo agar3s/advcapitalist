@@ -13,13 +13,24 @@ export default class Icon extends Phaser.GameObjects.Container {
     progressLoadBar.setOrigin(0)
     this.add(progressLoadBar)
 
-    let progressFillBar = params.scene.add.sprite(0, 0, 'progressFillBar')
-    progressFillBar.setOrigin(0)
-    this.add(progressFillBar)
+    this.progressFillBar = params.scene.add.sprite(0, 0, 'progressFillBar')
+    this.progressFillBar.setOrigin(0)
+    this.add(this.progressFillBar)
+
+    this.progressSpriteBar = params.scene.add.sprite(0, 0, 'progressSpriteBar')
+    this.progressSpriteBar.setOrigin(0).setVisible(false)
+    this.add(this.progressSpriteBar)
+
+    params.scene.anims.create({
+      key: 'loading',
+      frames: params.scene.anims.generateFrameNumbers('progressSpriteBar', { frames: [ 0, 1, 2, 3, 4, 5, 6 ] }),
+      frameRate: 30,
+      repeat: -1
+    })
+    this.progressSpriteBar.play('loading')
 
     this.shape = params.scene.make.graphics()
     this.add(this.shape)
-
 
     this.revenueLabel = params.scene.add.text(
       172,
@@ -34,7 +45,7 @@ export default class Icon extends Phaser.GameObjects.Container {
     )
     this.revenueLabel.setOrigin(0.5, 0).setStroke('#000000', 6)
     this.add(this.revenueLabel)
-    this.auto = params.auto
+    if (params.auto) this.setAuto()
     if (!this.auto) this.updateProgress(1.0)
   }
 
@@ -60,5 +71,7 @@ export default class Icon extends Phaser.GameObjects.Container {
   setAuto () {
     this.auto = true
     this.shape.clear()
+    this.progressSpriteBar.setVisible(true)
+    this.progressFillBar.setVisible(false)
   }
 }

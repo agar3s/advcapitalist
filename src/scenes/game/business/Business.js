@@ -61,7 +61,7 @@ export default class Business extends Phaser.GameObjects.Container {
       scene: params.scene,
       x: 210,
       y: 20,
-      auto: gs.bs[this.key].manager
+      auto: !this.updateTimers
     })
     this.progressBar.updateRevenueText(this.baseRevenue*gs.bs[this.key].investments*0.01)
     this.add(this.progressBar)
@@ -199,7 +199,7 @@ export default class Business extends Phaser.GameObjects.Container {
   }
 
   evaluateUpdateTimers () {
-    this.updateTimers = !gs.bs[this.key].manager || (this.baseTime/gs.bs[this.key].speed) > 250
+    this.updateTimers = !gs.bs[this.key].manager || (this.baseTime/gs.bs[this.key].speed) > 1000
   }
 
   checkProgressBarUpdate() {
