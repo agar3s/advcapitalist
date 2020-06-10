@@ -8,7 +8,7 @@ export default class Icon extends Phaser.GameObjects.Container {
     let iconBg = params.scene.add.sprite(anchor.x, anchor.y, 'iconBg')
     this.add(iconBg)
 
-    this.icon = params.scene.add.sprite(anchor.x, anchor.y, params.icon)
+    this.icon = params.scene.add.sprite(anchor.x, anchor.y - 6, params.icon)
     this.icon.setInteractive({ useHandCursor: true })
     this.icon.on('pointerdown', _ => {
       this.emit('produce')
@@ -16,12 +16,12 @@ export default class Icon extends Phaser.GameObjects.Container {
     this.add(this.icon)
 
     // total invesments
-    let investmentsBar = params.scene.add.sprite(0, anchor.y + 50, 'iconBar')
+    let investmentsBar = params.scene.add.sprite(0, anchor.y + 36, 'iconBar')
     investmentsBar.setOrigin(0, 0.5)
     this.add(investmentsBar)
 
 
-    this.investmentsLoad = params.scene.add.image(0, anchor.y + 50, 'iconBarLoad')
+    this.investmentsLoad = params.scene.add.image(0, anchor.y + 36, 'iconBarLoad')
     this.investmentsLoad.setOrigin(0, 0.5)
     this.add(this.investmentsLoad)
 
@@ -30,7 +30,7 @@ export default class Icon extends Phaser.GameObjects.Container {
 
     this.investmentsLabel = params.scene.add.text(
       anchor.x,
-      anchor.y + 50,
+      anchor.y + 36,
       '',
       {
         fontFamily: 'CalvertMT-Bold',
@@ -48,7 +48,7 @@ export default class Icon extends Phaser.GameObjects.Container {
     
     this.shape.clear()
     this.shape.fillStyle(0x22272e)
-    this.shape.fillRect(112, 96, -104*progress, 28)
+    this.shape.fillRect(112, 82, -104*progress, 27)
 
     let text = `${investments}/${nextUnlock}`
     if (!nextUnlock) {

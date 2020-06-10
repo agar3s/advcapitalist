@@ -9,11 +9,6 @@ import serverConnector from '../../utils/serverConnector'
 
 const SAVE_TIMEOUT = 5000;
 
-var formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
-
 export default class GameScene extends Scene {
   constructor () {
     super({key: 'gameScene'})
@@ -32,20 +27,7 @@ export default class GameScene extends Scene {
     this.events.on('pause', _ => this.pause(), this)
     this.events.on('resume', _ => this.resume(), this)
 
-    this.label = this.add.text(
-      320,
-      40,
-      'a sample text',
-      {
-        fontFamily: 'CalvertMT-Bold',
-        color: '#fff',
-        align: 'center',
-        fontSize: '64px',
-        wordWrap: { width: this.background_width - 256 }
-      }
-    )
-    this.label.setStroke('#000000', 8)
-    this.label.setOrigin(0.5)
+    this.bg = this.add.sprite(0, 0, 'mainBG').setOrigin(0)
 
     this.cameras.main.setSize(640, 1280);
     this.setupBusinesses()
@@ -53,6 +35,7 @@ export default class GameScene extends Scene {
 
     this.input.on('wheel', (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
       this.cameras.main.scrollY += deltaY * 0.5;
+      this.bg.y = this.cameras.main.scrollY
     });
     
     // load gui
@@ -79,7 +62,7 @@ export default class GameScene extends Scene {
       let businessObject = new Business({
         scene: this,
         x: 0,
-        y: (index+1)*200,
+        y: (index+1)*166,
         key,
         ...constants.BUSINESSES[key]
       })
@@ -107,10 +90,6 @@ export default class GameScene extends Scene {
 
   addMoney (money) {
     gs.set('game.money', gs.stats.game.money + money)
-    //gs.stats.game.money
-    //this.money += money
-    this.label.text = formatter.format(gs.stats.game.money*0.01)
-
   }
 
   checkInvesment (business) {
