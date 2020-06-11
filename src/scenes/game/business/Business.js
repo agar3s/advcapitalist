@@ -195,7 +195,7 @@ export default class Business extends Phaser.GameObjects.Container {
   }
 
   evaluateUpdateTimers () {
-    this.updateTimers = !gs.bs[this.key].manager || (this.baseTime/gs.bs[this.key].speed) > 1000
+    this.updateTimers = !gs.bs[this.key].manager || (this.baseTime/gs.bs[this.key].speed) > 500
   }
 
   checkProgressBarUpdate() {

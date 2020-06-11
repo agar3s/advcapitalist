@@ -16,6 +16,7 @@ export default class Manager extends Phaser.GameObjects.Container {
 
     this.arrow = params.scene.add.sprite(40, 100, 'arrow')
     this.arrow.setVisible(false)
+    this.scene = params.scene
     this.add(this.arrow)
   }
 
@@ -97,11 +98,20 @@ export default class Manager extends Phaser.GameObjects.Container {
 
   displayArrow() {
     this.arrow.setVisible(true)
+    this.arrowTween = this.scene.tweens.add({
+      targets: this.arrow,
+      y: 115,
+      ease: 'Sine.easeInOut',
+      duration: 600,
+      yoyo: true,
+      loop: -1,
+    })
   }
 
   checkArrow() {
     if (!this.arrow.visible) return
     this.arrow.setVisible(false)
+    this.arrowTween.stop()
     gs.set('tutorial.open', false)
   }
 

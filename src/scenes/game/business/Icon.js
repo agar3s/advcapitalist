@@ -46,6 +46,7 @@ export default class Icon extends Phaser.GameObjects.Container {
 
     this.arrow = params.scene.add.sprite(60, 140, 'arrow')
     this.arrow.setVisible(false)
+    this.scene = params.scene
     this.add(this.arrow)
   }
 
@@ -65,11 +66,20 @@ export default class Icon extends Phaser.GameObjects.Container {
 
   displayArrow() {
     this.arrow.setVisible(true)
+    this.arrowTween = this.scene.tweens.add({
+      targets: this.arrow,
+      y: 120,
+      ease: 'Sine.easeInOut',
+      duration: 600,
+      yoyo: true,
+      loop: -1,
+    })
   }
   
   checkArrow() {
     if (!this.arrow.visible) return
     this.arrow.setVisible(false)
+    
     gs.set('tutorial.open', false)
   }
 }

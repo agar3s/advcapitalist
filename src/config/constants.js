@@ -136,13 +136,6 @@ const BUSINESSES = {
 }
 
 const TRIGGERS = {
-  TUTO_A: {
-    text: 'We need to recover the glory of the Dwarf people!\nClick on the PickAxe to get some gold!',
-    watch: 'game.money',
-    condition: 0,
-    arrow: 'MINER.icon',
-    nextTrigger: 'TUTO_B'
-  },
   TUTO_B: {
     text: 'Now you can afford another miner Dwarf to get more gold!\nHire Him!',
     watch: 'game.money',
@@ -151,9 +144,10 @@ const TRIGGERS = {
     nextTrigger: 'TUTO_C'
   },
   TUTO_C: {
-    text: 'Keep going!\nMining gold requires perseverance!',
+    text: 'Keep going!\nMining gold requires hard work!',
     watch: 'businesses.MINER.investments',
     condition: 2,
+    keepOpen: true,
     arrow: 'MINER.icon',
     nextTrigger: 'TUTO_D'
   },

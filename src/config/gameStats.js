@@ -11,7 +11,7 @@ let stats = {
   },
   tutorial: {
     triggers: 'TUTO_B',
-    text: 'We need to recover the glory of the Dwarf people!\nClick on the PickAxe to get some gold!',
+    text: 'Welcome to the Dwarf lands!\nHelp us to get some gold by clicking on the PickAxe!',
     open: true,
     arrow: 'MINER.icon'
   },

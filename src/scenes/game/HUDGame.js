@@ -111,6 +111,7 @@ export default class HUDGameScene extends Scene {
   }
 
   hideInfo() {
+    if (this.trigger && this.trigger.keepOpen) return
     this.closeInfoTween.play()
   }
 
