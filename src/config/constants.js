@@ -8,7 +8,7 @@
 */
 
 const ZOOM = 1
-const BACKGROUND_COLOR = 0x645246
+const BACKGROUND_COLOR = 0x333333
 
 // time in milliseconds to keep visible the "splash" scene
 const TIME_SPLASH = 200
