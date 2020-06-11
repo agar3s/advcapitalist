@@ -107,14 +107,16 @@ export default class Invest extends Phaser.GameObjects.Container {
     this.unitsLabel.text = cost.units
   }
 
+  // return true if enabled was set to true
   setEnabled(enabled) {
-    if(this.enabled == enabled) return
+    if (this.enabled == enabled) return false
     this.enabled = enabled
     this.investButton.visible = this.enabled
     this.investButtonDisabled.visible = !this.enabled
     this.costLabel.alpha = this.enabled ? 1.0: 0.5
     this.unitsLabel.alpha = this.enabled ? 1.0: 0.5
     this.buyLabel.alpha = this.enabled ? 1.0: 0.5
+    return enabled
   }
 
   displayArrow() {

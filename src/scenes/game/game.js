@@ -46,7 +46,19 @@ export default class GameScene extends Scene {
       this.scrollCamera(deltaY)
     });
     
+    // load sfx
+    this.sfxInvest = this.sound.add('sfxInvest')
+    this.sfxHireManager = this.sound.add('sfxHireManager')
+    this.sfxUnlockBusiness = this.sound.add('sfxUnlockBusiness')
+    this.sfxBusinessUnlocked = this.sound.add('sfxBusinessUnlocked')
     
+    // loag mx bg
+    this.bgMain = this.sound.add('bgMain')
+    this.bgMain.volume = 0.2
+    this.bgMain.play({
+      loop: true
+    })
+
     // load gui
     if (this.constants.DAT_GUI_ENABLE) {
       gs.setListener('mainScene.rotationRatio', val => {
@@ -97,6 +109,17 @@ export default class GameScene extends Scene {
       businessObject.on('hireIntent', _ => {
         this.checkHire(businessObject)
       })
+
+      businessObject.on('produce', _ => {
+        businessObject.sfxProduce.play()
+      })
+      
+      businessObject.on('newBusinessUnlocked', _ => {
+        this.sfxUnlockBusiness.play()
+      })
+      businessObject.on('businessStarted', _ => {
+        this.sfxBusinessUnlocked.play()
+      })
       
       this.add.existing(businessObject)
       this.businesses[key] = businessObject
@@ -125,12 +148,14 @@ export default class GameScene extends Scene {
     if (gs.stats.game.money < business.cost) return
     this.addMoney(-business.cost)
     business.invest()
+    this.sfxInvest.play()
   }
 
   checkHire (business) {
     if (gs.stats.game.money < business.managerCost) return
     this.addMoney(-business.managerCost)
     business.hireManager()
+    this.sfxHireManager.play()
   }
   
   setArrow (component) {

@@ -37,6 +37,7 @@ const BUSINESSES = {
   MINER: {
     business: 'Mines',
     icon: 'mines',
+    sfx: 'sfxMinerProduce',
     cost: 373.8,
     coefficient: 1.07,
     time: 0.6,
@@ -48,6 +49,7 @@ const BUSINESSES = {
   DRILL: {
     business: 'Drill',
     icon: 'drill',
+    sfx: 'sfxProduce',
     cost: 6000,
     coefficient: 1.15,
     time: 3,
@@ -59,6 +61,7 @@ const BUSINESSES = {
   TAVERN: {
     business: 'Tavern',
     icon: 'tavern',
+    sfx: 'sfxProduce',
     cost: 72000,
     coefficient: 1.14,
     time: 6,
@@ -70,17 +73,19 @@ const BUSINESSES = {
   FORGE: {
     business: 'Forge',
     icon: 'forge',
+    sfx: 'sfxForgeProduce',
     cost: 864000,
     coefficient: 1.13,
     time: 12,
     revenue: 432000,
     managerCost: 50000000,
     managerKey: 'dwarf2',
-    managerIndex: 0
+    managerIndex: 3
   },
   JEWELERY: {
     business: 'Jewelery',
     icon: 'jewelery',
+    sfx: 'sfxJeweleryProduce',
     cost: 10368000,
     coefficient: 1.12,
     time: 24,
@@ -92,6 +97,7 @@ const BUSINESSES = {
   TRADE: {
     business: 'Trade',
     icon: 'trade',
+    sfx: 'sfxTradeProduce',
     cost: 124416000,
     coefficient: 1.11,
     time: 96,
@@ -103,6 +109,7 @@ const BUSINESSES = {
   CASTLE: {
     business: 'Castle',
     icon: 'castle',
+    sfx: 'sfxProduce',
     cost: 1492992000,
     coefficient: 1.10,
     time: 384,
@@ -114,6 +121,7 @@ const BUSINESSES = {
   ARMY: {
     business: 'Army',
     icon: 'army',
+    sfx: 'sfxArmyProduce',
     cost: 17915904000,
     coefficient: 1.09,
     time: 1536,
@@ -125,6 +133,7 @@ const BUSINESSES = {
   QUEST: {
     business: 'Quest',
     icon: 'quest',
+    sfx: 'sfxQuestProduce',
     cost: 214990848000,
     coefficient: 1.08,
     time: 6144,

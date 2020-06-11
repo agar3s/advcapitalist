@@ -163,8 +163,24 @@ export default class BootScene extends Scene {
     this.load.image('castle', iconsRoute + 'castle.png')
     this.load.image('army', iconsRoute + 'army.png')
     this.load.image('quest', iconsRoute + 'quest.png')
-    
     this.load.image('coin', iconsRoute + 'coin.png')
+
+    // load mx
+    this.load.audio('bgMain', urlBase + 'assets/audio/bg/main.ogg')
+
+    // load sfx
+    this.load.audio('sfxNotification', urlBase + 'assets/audio/fx/notification.ogg')
+    this.load.audio('sfxInvest', urlBase + 'assets/audio/fx/invest.ogg')
+    this.load.audio('sfxProduce', urlBase + 'assets/audio/fx/produce.ogg')
+    this.load.audio('sfxMinerProduce', urlBase + 'assets/audio/fx/minerProduce.ogg')
+    this.load.audio('sfxForgeProduce', urlBase + 'assets/audio/fx/forgeProduce.ogg')
+    this.load.audio('sfxJeweleryProduce', urlBase + 'assets/audio/fx/jeweleryProduce.ogg')
+    this.load.audio('sfxTradeProduce', urlBase + 'assets/audio/fx/tradeProduce.ogg')
+    this.load.audio('sfxArmyProduce', urlBase + 'assets/audio/fx/armyProduce.ogg')
+    this.load.audio('sfxQuestProduce', urlBase + 'assets/audio/fx/questProduce.ogg')
+    this.load.audio('sfxHireManager', urlBase + 'assets/audio/fx/hireManager.ogg')
+    this.load.audio('sfxUnlockBusiness', urlBase + 'assets/audio/fx/unlockBusiness.ogg')
+    this.load.audio('sfxBusinessUnlocked', urlBase + 'assets/audio/fx/businessUnlocked.ogg')
 
     // load json
     this.load.json('translations', urlBase + 'assets/texts.json')

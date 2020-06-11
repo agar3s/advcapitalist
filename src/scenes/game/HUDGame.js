@@ -136,8 +136,13 @@ export default class HUDGameScene extends Scene {
       paused: true
     })
 
+    let sfxNotification = this.sound.add('sfxNotification')
+
     gs.setListener('notification.open', value => {
-      if (value) this.displayNotification()
+      if (value) { 
+        this.displayNotification()
+        sfxNotification.play()
+      }
     })
   }
 

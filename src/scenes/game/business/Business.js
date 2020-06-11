@@ -51,6 +51,7 @@ export default class Business extends Phaser.GameObjects.Container {
     })
     this.add(this.icon)
     this.icon.updateInvestmentLabel(gs.bs[this.key].investments, unlockValues[this.nextUnlockIndex], unlockValues[this.nextUnlockIndex-1]||0)
+    this.sfxProduce = params.scene.sound.add(params.sfx)
     this.icon.on('produce', this.produce, this)
 
     this.progressBar = new Progress({
@@ -142,6 +143,7 @@ export default class Business extends Phaser.GameObjects.Container {
     gs.bs[this.key].timeTriggered = +new Date()
     gs.bs[this.key].producing = true
     this.time = this.baseTime - overTime
+    if (!gs.bs[this.key].manager) this.emit('produce')
   }
 
   // overTime if runs on idle mode // minimized
@@ -170,6 +172,7 @@ export default class Business extends Phaser.GameObjects.Container {
 
     if (gs.bs[this.key].investments == 1) {
       this.setLocked(false)
+      this.emit('businessStarted')
     }
   }
 
@@ -200,8 +203,11 @@ export default class Business extends Phaser.GameObjects.Container {
   }
 
   checkCosts() {
-    this.investButton.setEnabled(gs.stats.game.money>=this.cost)
+    const investEnabled = this.investButton.setEnabled(gs.stats.game.money>=this.cost)
     this.managerContainer.setEnabled(gs.stats.game.money>=this.managerCost)
+    if (gs.bs[this.key].investments == 0 && investEnabled) {
+      this.emit('newBusinessUnlocked')
+    }
   }
 
   evaluateUpdateTimers () {
