@@ -1,11 +1,7 @@
 import Scene from '../scene'
 import gs from '../../config/gameStats'
 import constants from '../../config/constants'
-
-var formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
+import utils from '../../utils/utils'
 
 export default class HUDGameScene extends Scene {
   constructor () {
@@ -176,7 +172,8 @@ export default class HUDGameScene extends Scene {
 
   // dont  call the super update function....
   update () {
-    this.moneyLabel.text = `${formatter.format(gs.stats.game.money*0.01)}`
+    let money = utils.parseGold(gs.stats.game.money*0.01)
+    this.moneyLabel.text = `${money.value} ${money.units}`
     if(this.trigger) this.checkTrigger()
   }
 

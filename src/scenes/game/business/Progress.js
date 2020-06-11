@@ -1,9 +1,4 @@
 
-var formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
-
 export default class Icon extends Phaser.GameObjects.Container {
 
   constructor (params) {
@@ -49,9 +44,9 @@ export default class Icon extends Phaser.GameObjects.Container {
     if (!this.auto) this.updateProgress(1.0)
   }
 
-  updateRevenueText (text) {
-    this.revenueLabel.text = formatter.format(text)
-    if (this.auto) this.revenueLabel.text += ' /sec'
+  updateRevenueText (parsedGold) {
+    this.revenueLabel.text = `${parsedGold.value} ${parsedGold.units}`
+    if (this.auto) this.revenueLabel.text += ' / sec'
   }
 
   updateProgress (percentage) {

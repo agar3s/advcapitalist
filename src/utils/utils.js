@@ -5,6 +5,37 @@ function uuidv4() {
   });
 }
 
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD'
+});
+
+const millionUnits = [
+  '',
+  'million',
+  'billion',
+  'trillion',
+  'quatrillion'
+]
+
+function parseGold (gold) {
+  let value = gold
+  let million = 0
+  if (value > 1000000) {
+    value /= 1000000
+    million += 1
+    while (value/1000 > 1) {
+      value /= 1000
+      million += 1
+    }
+  }
+  return {
+    value: formatter.format(value),
+    units: millionUnits[million]
+  }
+}
+
 export default {
-  uuidv4
+  uuidv4,
+  parseGold
 }

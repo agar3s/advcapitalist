@@ -7,13 +7,10 @@ import Manager from './Manager'
 import getTimeManager from '../../../managers/TimeManager'
 
 import gs from '../../../config/gameStats'
+import utils from '../../../utils/utils'
 
 const unlockValues = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 
-var formatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD',
-});
 
 export default class Business extends Phaser.GameObjects.Container {
 
@@ -62,20 +59,8 @@ export default class Business extends Phaser.GameObjects.Container {
       y: 24,
       auto: !this.updateTimers
     })
-    this.progressBar.updateRevenueText(this.baseRevenue*gs.bs[this.key].investments*0.01)
+    this.progressBar.updateRevenueText(utils.parseGold(this.baseRevenue*gs.bs[this.key].investments*0.01))
     this.add(this.progressBar)
-
-    // invest button
-    this.investButton = new Invest({
-      scene: params.scene,
-      x: 168,
-      y: 64
-    })
-    this.investButton.on('invest', _ => {
-      this.emit('investIntent')
-    })
-    this.add(this.investButton)
-    this.updateCost()
 
     // remaining time label
     this.timeContainer = new Time({
@@ -98,6 +83,22 @@ export default class Business extends Phaser.GameObjects.Container {
       this.emit('hireIntent')
     })
     this.add(this.managerContainer)
+
+    // invest button
+    this.investButton = new Invest({
+      scene: params.scene,
+      x: 168,
+      y: 64
+    })
+    this.investButton.on('invest', _ => {
+      this.emit('investIntent')
+    })
+    this.updateCost()
+
+    this.overlayLocked = params.scene.add.sprite(3, 0, 'businnesDisabled').setOrigin(0)
+    this.add(this.overlayLocked)
+    this.add(this.investButton)
+
     this.setLocked(this.locked)
 
     getTimeManager().addSubscriber(this)
@@ -132,6 +133,7 @@ export default class Business extends Phaser.GameObjects.Container {
     this.progressBar.visible = !this.locked
     this.timeContainer.visible = !this.locked
     this.managerContainer.visible = !this.locked
+    this.overlayLocked.visible = this.locked
   }
 
   produce (overTime = 0) {
@@ -162,8 +164,8 @@ export default class Business extends Phaser.GameObjects.Container {
     this.updateCost()
     this.checkUnlock()
     this.icon.updateInvestmentLabel(gs.bs[this.key].investments, unlockValues[this.nextUnlockIndex], unlockValues[this.nextUnlockIndex-1]||0)
-    let revenueText = this.updateTimers ? (this.baseRevenue*gs.bs[this.key].investments*0.01) : this.getProductivity()
-    this.progressBar.updateRevenueText(revenueText)
+    let revenue = this.updateTimers ? (this.baseRevenue*gs.bs[this.key].investments*0.01) : this.getProductivity()
+    this.progressBar.updateRevenueText(utils.parseGold(revenue))
 
     if (gs.bs[this.key].investments == 1) {
       this.setLocked(false)
@@ -179,7 +181,7 @@ export default class Business extends Phaser.GameObjects.Container {
 
   updateCost () {
     this.cost = Math.round(Math.pow(this.coefficient, gs.bs[this.key].investments) * this.baseCost)
-    this.investButton.updateText(`${formatter.format(this.cost*0.01)}`)
+    this.investButton.updateText(utils.parseGold(this.cost*0.01))
   }
 
   displayNotification(text) {

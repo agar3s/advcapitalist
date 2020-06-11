@@ -43,7 +43,6 @@ export default class Invest extends Phaser.GameObjects.Container {
       this.investButtonPressed.visible = false
     })
 
-    this.setEnabled(!!params.enabled)
 
     this.buyLabel = params.scene.add.text(
       anchor.x + 20,
@@ -60,18 +59,32 @@ export default class Invest extends Phaser.GameObjects.Container {
     this.add(this.buyLabel)
 
     this.costLabel = params.scene.add.text(
-      anchor.x + 210,
-      anchor.y + 36,
+      anchor.x + 205,
+      anchor.y + 28,
       '',
       {
         fontFamily: 'CalvertMT-Bold',
-        fontSize: '18px',
+        fontSize: '16px',
         align: 'right',
         color: '#fff'
       }
     )
     this.costLabel.setOrigin(1, 0.5).setStroke('#000', 6)
     this.add(this.costLabel)
+
+    this.unitsLabel = params.scene.add.text(
+      anchor.x + 205,
+      anchor.y + 47,
+      '',
+      {
+        fontFamily: 'CalvertMT-Bold',
+        fontSize: '15px',
+        align: 'right',
+        color: '#fff'
+      }
+    )
+    this.unitsLabel.setOrigin(1, 0.5).setStroke('#000', 4)
+    this.add(this.unitsLabel)
 
     this.arrow = params.scene.add.sprite(150, 80, 'arrow')
     this.arrow.setVisible(false)
@@ -86,10 +99,12 @@ export default class Invest extends Phaser.GameObjects.Container {
     })
     this.scene = params.scene
     this.add(this.arrow)
+    this.setEnabled(!!params.enabled)
   }
 
-  updateText(text) {
-    this.costLabel.text = text
+  updateText(cost) {
+    this.costLabel.text = cost.value
+    this.unitsLabel.text = cost.units
   }
 
   setEnabled(enabled) {
@@ -97,6 +112,9 @@ export default class Invest extends Phaser.GameObjects.Container {
     this.enabled = enabled
     this.investButton.visible = this.enabled
     this.investButtonDisabled.visible = !this.enabled
+    this.costLabel.alpha = this.enabled ? 1.0: 0.5
+    this.unitsLabel.alpha = this.enabled ? 1.0: 0.5
+    this.buyLabel.alpha = this.enabled ? 1.0: 0.5
   }
 
   displayArrow() {

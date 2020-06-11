@@ -6,6 +6,7 @@ import Business from './business/Business'
 import getTimeManager from '../../managers/TimeManager'
 import getDataManager from '../../managers/dataManager'
 import serverConnector from '../../utils/serverConnector'
+import utils from '../../utils/utils'
 
 const SAVE_TIMEOUT = 5000;
 
@@ -83,10 +84,11 @@ export default class GameScene extends Scene {
       this.businesses[key] = businessObject
       idleEarnings += businessObject.calculateIdleAway()
     });
-    console.log(`We made ${idleEarnings} while you were away`)
+    
     if (idleEarnings) {
+      let gold = utils.parseGold(idleEarnings*0.01)
       gs.stats.notification.icon = 'coin'
-      gs.stats.notification.text = `We made ${idleEarnings} while you were away`
+      gs.stats.notification.text = `We made ${gold.value}${gold.units?' '+gold.units:''} while you were away`
       setTimeout(_ => gs.set('notification.open', true), 500)
       this.addMoney(idleEarnings)
     }

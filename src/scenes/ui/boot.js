@@ -103,6 +103,7 @@ export default class BootScene extends Scene {
 
     this.load.image('mainBG', uiRoute + 'de_bg.jpg')
     this.load.image('businessBg', uiRoute + 'section_bg.png')
+    this.load.image('businnesDisabled', uiRoute + 'section_disabled.png')
     this.load.image('iconBg', uiRoute + 'icon_bg.png')
     this.load.image('iconBar', uiRoute + 'icon_bar.png')
     this.load.image('iconBarLoad', uiRoute + 'icon_bar_load.png')
