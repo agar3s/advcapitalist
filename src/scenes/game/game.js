@@ -51,10 +51,13 @@ export default class GameScene extends Scene {
     this.sfxHireManager = this.sound.add('sfxHireManager')
     this.sfxUnlockBusiness = this.sound.add('sfxUnlockBusiness')
     this.sfxBusinessUnlocked = this.sound.add('sfxBusinessUnlocked')
+    this.sfxInvestAvailable = this.sound.add('sfxProduce')
+    this.sfxInvestAvailable.volume = 0.1
+    this.sfxManagerAvailable = this.sound.add('sfxManagerAvailable')
     
     // loag mx bg
     this.bgMain = this.sound.add('bgMain')
-    this.bgMain.volume = 0.2
+    this.bgMain.volume = 0.15
     this.bgMain.play({
       loop: true
     })
@@ -117,8 +120,17 @@ export default class GameScene extends Scene {
       businessObject.on('newBusinessUnlocked', _ => {
         this.sfxUnlockBusiness.play()
       })
+
       businessObject.on('businessStarted', _ => {
         this.sfxBusinessUnlocked.play()
+      })
+
+      businessObject.on('investmentAvailable', _ => {
+        this.sfxInvestAvailable.play()
+      })
+
+      businessObject.on('managerAvailable', _ => {
+        this.sfxManagerAvailable.play()
       })
       
       this.add.existing(businessObject)

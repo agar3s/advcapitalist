@@ -89,10 +89,13 @@ export default class HUDGameScene extends Scene {
         this.infoContainer.setVisible(false)
       }
     })
+
+    let sfxTutorialAppears = this.sound.add('sfxTutorialAppears')
     
     gs.setListener('tutorial.open', visible => {
       if (visible) {
         this.displayInfo()
+        sfxTutorialAppears.play()
       } else {
         this.hideInfo()
       }

@@ -117,11 +117,12 @@ export default class Manager extends Phaser.GameObjects.Container {
   }
 
   setEnabled(enabled) {
-    if(this.enabled == enabled) return
+    if(this.enabled == enabled) return false
     this.enabled = enabled
     this.hireManagerButton.visible = this.enabled
     this.hireManagerButtonDisabled.visible = !this.enabled
     this.hireLabel.visible = this.enabled
+    return enabled
   }
 
   setHasManager(hasManager) {

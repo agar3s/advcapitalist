@@ -204,9 +204,15 @@ export default class Business extends Phaser.GameObjects.Container {
 
   checkCosts() {
     const investEnabled = this.investButton.setEnabled(gs.stats.game.money>=this.cost)
-    this.managerContainer.setEnabled(gs.stats.game.money>=this.managerCost)
-    if (gs.bs[this.key].investments == 0 && investEnabled) {
-      this.emit('newBusinessUnlocked')
+    if (investEnabled) {
+      if (gs.bs[this.key].investments == 0) this.emit('newBusinessUnlocked')
+      else this.emit('investmentAvailable')
+    }
+    if (!gs.bs[this.key].manager) {
+      const managerEnabled =this.managerContainer.setEnabled(gs.stats.game.money>=this.managerCost)
+      if (managerEnabled) {
+        this.emit('managerAvailable')
+      }
     }
   }
 
