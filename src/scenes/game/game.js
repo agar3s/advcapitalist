@@ -36,6 +36,12 @@ export default class GameScene extends Scene {
 
     this.input.on('wheel', (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
       this.cameras.main.scrollY += deltaY * 0.5;
+      console.log(this.cameras.main.scrollY)
+      if (this.cameras.main.scrollY < 0)  {
+        this.cameras.main.scrollY = 0
+      } else if (this.cameras.main.scrollY > 400) {
+        this.cameras.main.scrollY = 400
+      }
       this.bg.y = this.cameras.main.scrollY
     });
     
