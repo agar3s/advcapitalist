@@ -12,7 +12,7 @@ const SAVE_TIMEOUT = 5000;
 export default class GameScene extends Scene {
   constructor () {
     super({key: 'gameScene'})
-    this.businesses = []
+    this.businesses = {}
   }
   
   create (params) {
@@ -80,12 +80,16 @@ export default class GameScene extends Scene {
       })
       
       this.add.existing(businessObject)
-      this.businesses.push(businessObject)
+      this.businesses[key] = businessObject
       idleEarnings += businessObject.calculateIdleAway()
     });
     
     console.log('total earned ', idleEarnings)
     this.addMoney(idleEarnings)
+    if (gs.stats.tutorial.open) this.setArrow(gs.stats.tutorial.arrow)
+    gs.setListener('tutorial.arrow', value => {
+      this.setArrow(value)
+    })
   }
 
   addMoney (money) {
@@ -104,7 +108,11 @@ export default class GameScene extends Scene {
     business.hireManager()
   }
   
-
+  setArrow (component) {
+    let [key, sub] = component.split('.')
+    this.children.bringToTop(this.businesses[key])
+    this.businesses[key].displayArrowOn(sub)
+  }
 
   shutdown () {
     this.events.off('shutdown')

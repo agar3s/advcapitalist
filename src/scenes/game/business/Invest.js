@@ -1,3 +1,4 @@
+import gs from '../../../config/gameStats'
 
 export default class Invest extends Phaser.GameObjects.Container {
   
@@ -26,6 +27,7 @@ export default class Invest extends Phaser.GameObjects.Container {
     this.investButton.on('pointerdown', _ => {
       this.investButtonPressed.visible = true
       this.emit('invest')
+      this.checkArrow()
     })
 
     this.investButton.on('pointerup', _ => {
@@ -70,6 +72,10 @@ export default class Invest extends Phaser.GameObjects.Container {
     )
     this.costLabel.setOrigin(1, 0.5).setStroke('#000', 6)
     this.add(this.costLabel)
+
+    this.arrow = params.scene.add.sprite(150, 80, 'arrow')
+    this.arrow.setVisible(false)
+    this.add(this.arrow)
   }
 
   updateText(text) {
@@ -81,5 +87,14 @@ export default class Invest extends Phaser.GameObjects.Container {
     this.enabled = enabled
     this.investButton.visible = this.enabled
     this.investButtonDisabled.visible = !this.enabled
+  }
+
+  displayArrow() {
+    this.arrow.setVisible(true)
+  }
+  checkArrow() {
+    if (!this.arrow.visible) return
+    this.arrow.setVisible(false)
+    gs.set('tutorial.open', false)
   }
 }

@@ -118,6 +118,10 @@ export default class BootScene extends Scene {
     this.load.image('hireButtonPressed', uiRoute + 'hire_button_pressed.png')
     this.load.image('hireButtonDisabled', uiRoute + 'hire_button_disabled.png')
     this.load.image('managerBG', uiRoute + 'manager_bg.png')
+    this.load.image('infoBox', uiRoute + 'info.png')
+    this.load.image('dwarfKing', uiRoute + 'dwarf.png')
+    this.load.image('arrow', uiRoute + 'arrow.png')
+    
     this.load.spritesheet('progressSpriteBar', uiRoute + 'load_fill_bar_sprite.png', {
       frameWidth: 344,
       frameHeight: 34
@@ -156,11 +160,6 @@ export default class BootScene extends Scene {
     this.load.image('quest', iconsRoute + 'quest.png')
     
     this.load.image('coin', iconsRoute + 'coin.png')
-
-    // load fonts
-    this.load.bitmapFont(this.fonts.BM_calvert.font, urlBase + 'assets/fonts/CalvertBold18px_0.png', urlBase + 'assets/fonts/CalvertBold18px.fnt')
-    this.load.bitmapFont(this.fonts.BM_kenneyMini.font, urlBase + 'assets/fonts/KenneyMini-8px_0.png', urlBase + 'assets/fonts/KenneyMini-8px.fnt')
-    this.load.bitmapFont(this.fonts.BM_kenneyMiniSquare.font, urlBase + 'assets/fonts/KenneyMiniSquare-8px_0.png', urlBase + 'assets/fonts/KenneyMiniSquare-8px.fnt')
 
     // load json
     this.load.json('translations', urlBase + 'assets/texts.json')

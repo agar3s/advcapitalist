@@ -13,6 +13,10 @@ export default class Manager extends Phaser.GameObjects.Container {
     this.createPortrait(params)
     this.setEnabled(!!params.enabled)
     this.setHasManager(gs.bs[this.businessKey].manager)
+
+    this.arrow = params.scene.add.sprite(40, 100, 'arrow')
+    this.arrow.setVisible(false)
+    this.add(this.arrow)
   }
 
   createButtons(params) {
@@ -35,6 +39,7 @@ export default class Manager extends Phaser.GameObjects.Container {
     this.hireManagerButton.on('pointerdown', _ => {
       this.hireManagerButtonPressed.visible = true
       this.emit('hire')
+      this.checkArrow()
     })
 
     this.hireManagerButton.on('pointerup', _ => {
@@ -88,6 +93,16 @@ export default class Manager extends Phaser.GameObjects.Container {
       this.hireManagerButtonHover.visible = false
       this.hireManagerButtonPressed.visible = false
     }
+  }
+
+  displayArrow() {
+    this.arrow.setVisible(true)
+  }
+
+  checkArrow() {
+    if (!this.arrow.visible) return
+    this.arrow.setVisible(false)
+    gs.set('tutorial.open', false)
   }
 
 }

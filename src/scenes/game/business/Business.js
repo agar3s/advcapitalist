@@ -102,9 +102,6 @@ export default class Business extends Phaser.GameObjects.Container {
 
     getTimeManager().addSubscriber(this)
 
-    // calculate new money
-    //this.time = (+new Date() - gs.bs[this.key].timeTriggered)
-    // this.calculateIdleAway()
   }
 
   calculateIdleAway() {
@@ -208,6 +205,24 @@ export default class Business extends Phaser.GameObjects.Container {
     if (!this.updateTimers) {
       this.timeContainer.updateTime(0)
       this.progressBar.setAuto()
+    }
+  }
+
+  displayArrowOn(component) {
+    console.log(component)
+    switch(component) {
+      case 'icon':
+        this.bringToTop(this.icon)
+        this.icon.displayArrow()
+      break
+      case 'invest':
+        this.bringToTop(this.investButton)
+        this.investButton.displayArrow()
+      break
+      case 'manager':
+        this.bringToTop(this.managerContainer)
+        this.managerContainer.displayArrow()
+      break
     }
   }
 

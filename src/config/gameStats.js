@@ -9,6 +9,12 @@ let stats = {
     language: 'en',
     money: 0,
   },
+  tutorial: {
+    triggers: 'TUTO_B',
+    text: 'We need to recover the glory of the Dwarf people!\nClick on the PickAxe to get some gold!',
+    open: true,
+    arrow: 'MINER.icon'
+  },
   scene: {
     restart: false,
     current: 'bootScene'
@@ -190,6 +196,7 @@ export default {
   setListener,
   removeListener,
   notifyListener,
+  get,
   set,
   setAll,
   setData

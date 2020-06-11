@@ -1,3 +1,4 @@
+import gs from '../../../config/gameStats'
 
 export default class Icon extends Phaser.GameObjects.Container {
   
@@ -12,6 +13,7 @@ export default class Icon extends Phaser.GameObjects.Container {
     this.icon.setInteractive({ useHandCursor: true })
     this.icon.on('pointerdown', _ => {
       this.emit('produce')
+      this.checkArrow()
     })
     this.add(this.icon)
 
@@ -41,6 +43,10 @@ export default class Icon extends Phaser.GameObjects.Container {
     )
     this.investmentsLabel.setOrigin(0.5).setStroke('#000', 4)
     this.add(this.investmentsLabel)
+
+    this.arrow = params.scene.add.sprite(60, 140, 'arrow')
+    this.arrow.setVisible(false)
+    this.add(this.arrow)
   }
 
   updateInvestmentLabel(investments, nextUnlock, prevUnlock) {
@@ -55,5 +61,15 @@ export default class Icon extends Phaser.GameObjects.Container {
       text = this.investmentsLabel.text = `${investments}`
     }
     this.investmentsLabel.text = text
+  }
+
+  displayArrow() {
+    this.arrow.setVisible(true)
+  }
+  
+  checkArrow() {
+    if (!this.arrow.visible) return
+    this.arrow.setVisible(false)
+    gs.set('tutorial.open', false)
   }
 }
