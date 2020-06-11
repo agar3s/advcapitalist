@@ -101,6 +101,7 @@ export default class BootScene extends Scene {
     // load ui
     const uiRoute = `${urlBase}assets/sprites/ui/`
 
+    this.load.image('avatar', uiRoute + 'avatar.png')
     this.load.image('mainBG', uiRoute + 'de_bg.jpg')
     this.load.image('businessBg', uiRoute + 'section_bg.png')
     this.load.image('businnesDisabled', uiRoute + 'section_disabled.png')

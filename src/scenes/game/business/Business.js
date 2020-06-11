@@ -77,7 +77,8 @@ export default class Business extends Phaser.GameObjects.Container {
       y: 32,
       businessKey: params.key,
       managerKey: params.managerKey,
-      managerIndex: params.managerIndex
+      managerIndex: params.managerIndex,
+      managerCost: params.managerCost
     })
     this.managerContainer.on('hire', _ => {
       this.emit('hireIntent')

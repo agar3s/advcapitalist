@@ -33,17 +33,19 @@ export default class GameScene extends Scene {
     this.cameras.main.setSize(640, 1280);
     this.setupBusinesses()
 
-
+    // drag screen setup
+    this.bg.setInteractive({draggable: true});
+    let previousDrag = 0
+    this.bg.on('pointerdown', _ => previousDrag = this.bg.y )
+    this.bg.on('drag', (pointer, dragX, dragY) => {
+      const deltaY = previousDrag - dragY
+      this.scrollCamera(deltaY)
+      previousDrag = dragY
+    })
     this.input.on('wheel', (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
-      this.cameras.main.scrollY += deltaY * 0.5;
-      console.log(this.cameras.main.scrollY)
-      if (this.cameras.main.scrollY < 0)  {
-        this.cameras.main.scrollY = 0
-      } else if (this.cameras.main.scrollY > 400) {
-        this.cameras.main.scrollY = 400
-      }
-      this.bg.y = this.cameras.main.scrollY
+      this.scrollCamera(deltaY)
     });
+    
     
     // load gui
     if (this.constants.DAT_GUI_ENABLE) {
@@ -59,6 +61,16 @@ export default class GameScene extends Scene {
     getTimeManager().addSubscriber(this)
   }
 
+  scrollCamera(deltaY) {
+    this.cameras.main.scrollY += deltaY * 0.5;
+    if (this.cameras.main.scrollY < 0)  {
+      this.cameras.main.scrollY = 0
+    } else if (this.cameras.main.scrollY > 400) {
+      this.cameras.main.scrollY = 400
+    }
+    this.bg.y = this.cameras.main.scrollY
+  }
+
   setupBusinesses () {
 
     const businessKeys = []
@@ -69,7 +81,7 @@ export default class GameScene extends Scene {
       let businessObject = new Business({
         scene: this,
         x: 0,
-        y: (index+1)*166,
+        y: (index+1)*165 + 20,
         key,
         ...constants.BUSINESSES[key]
       })

@@ -14,11 +14,16 @@ export default class HUDGameScene extends Scene {
 
     let bg = this.add.graphics()
     bg.fillStyle(0x0, 0.75)
-    bg.fillRect(0, 0, 640, 120)
+    bg.fillRect(0, 0, 640, 165)
+    
+    let goldIcon = this.add.sprite(620, 35, 'coin').setOrigin(1, 0)
+
+    let avatar = this.add.sprite(25, 15, 'avatar')
+    avatar.setOrigin(0)
 
     this.moneyLabel = this.add.text(
       620,
-      70,
+      120,
       '0',
       {
         fontFamily: 'CalvertMT-Bold',
@@ -96,13 +101,18 @@ export default class HUDGameScene extends Scene {
 
   buildNotificationContainer() {
     this.notificationContainer = this.add.container(0, -200)
+    
     let bg = this.add.sprite(320, 10, 'notificationBG').setOrigin(0.5, 0)
     this.notificationContainer.add(bg)
-    this.icon = this.add.sprite(40, 75, 'mines')
+    
+    let iconbg = this.add.sprite(85, 90, 'iconBg')
+    this.notificationContainer.add(iconbg)
+
+    this.icon = this.add.sprite(40, 55, 'mines')
     this.notificationContainer.add(this.icon)
     this.notificationText = this.add.text(
       160,
-      80,
+      40,
       'Miners increase speed X2',
       {
         fontFamily: 'CalvertMT-Bold',
@@ -118,7 +128,7 @@ export default class HUDGameScene extends Scene {
 
     this.showNotificationTween = this.tweens.add({
       targets: this.notificationContainer,
-      y: -50,
+      y: 0,
       ease: 'Cubic.easeInOut',
       duration: 500,
       hold: 2000,
@@ -135,7 +145,7 @@ export default class HUDGameScene extends Scene {
     let notification = gs.stats.notification
     this.icon.destroy()
     this.notificationText.text = notification.text
-    this.icon = this.add.sprite(40, 75, notification.icon).setOrigin(0)
+    this.icon = this.add.sprite(50, 55, notification.icon).setOrigin(0)
     this.notificationContainer.add(this.icon)
     this.showNotificationTween.play()
   }

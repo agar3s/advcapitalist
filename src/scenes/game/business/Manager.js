@@ -1,5 +1,6 @@
 
 import gs from '../../../config/gameStats'
+import utils from '../../../utils/utils'
 
 export default class Manager extends Phaser.GameObjects.Container {
   
@@ -63,7 +64,36 @@ export default class Manager extends Phaser.GameObjects.Container {
     this.hireManagerButton.on('pointerout', _ => {
       this.hireManagerButtonHover.visible = false
       this.hireManagerButtonPressed.visible = false
-    })    
+    })
+
+    this.hireLabel = params.scene.add.text(
+      this.anchor.x + 20,
+      this.anchor.y + 45,
+      'Hire!',
+      {
+        fontFamily: 'CalvertMT-Bold',
+        fontSize: '16px',
+        align: 'center',
+        color: '#fff'
+      }
+    )
+    this.hireLabel.setStroke('#000', 4)
+    this.add(this.hireLabel)
+
+    let hireCost = utils.parseGold(params.managerCost*0.01)
+    this.hireCostLabel = params.scene.add.text(
+      this.anchor.x + 40,
+      this.anchor.y + 80,
+      `${hireCost.value} ${hireCost.units}`,
+      {
+        fontFamily: 'CalvertMT-Bold',
+        fontSize: '14px',
+        align: 'center',
+        color: '#fff'
+      }
+    )
+    this.hireCostLabel.setStroke('#000', 4).setOrigin(0.5, 0)
+    this.add(this.hireCostLabel)
   }
 
   createPortrait(params) {
@@ -91,6 +121,7 @@ export default class Manager extends Phaser.GameObjects.Container {
     this.enabled = enabled
     this.hireManagerButton.visible = this.enabled
     this.hireManagerButtonDisabled.visible = !this.enabled
+    this.hireLabel.visible = this.enabled
   }
 
   setHasManager(hasManager) {
@@ -102,6 +133,8 @@ export default class Manager extends Phaser.GameObjects.Container {
       this.hireManagerButton.visible = false
       this.hireManagerButtonHover.visible = false
       this.hireManagerButtonPressed.visible = false
+      this.hireLabel.visible = false
+      this.hireCostLabel.visible = false
     }
   }
 
