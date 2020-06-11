@@ -62,6 +62,19 @@ export default class GameScene extends Scene {
       loop: true
     })
 
+    // coin emitter
+    this.coins = this.add.particles('coin')
+    this.coinsEmitter = this.coins.createEmitter({
+      x: 120,
+      y: 300,
+      lifespan: 2000,
+      gravityY: 1000,
+      angle: { min: 225, max: 315 },
+      speed: { min: -200, max: 400 },
+      scale: { min: 0.5, max: 0.8 }
+    })
+    this.coinsEmitter.explode(0, 0, 0)
+
     // load gui
     if (this.constants.DAT_GUI_ENABLE) {
       gs.setListener('mainScene.rotationRatio', val => {
@@ -161,6 +174,7 @@ export default class GameScene extends Scene {
     this.addMoney(-business.cost)
     business.invest()
     this.sfxInvest.play()
+    this.coinsEmitter.explode(constants.BUSINESSES[business.key].coinsEmit, business.x + 90, business.y + 60)
   }
 
   checkHire (business) {
@@ -168,6 +182,7 @@ export default class GameScene extends Scene {
     this.addMoney(-business.managerCost)
     business.hireManager()
     this.sfxHireManager.play()
+    this.coinsEmitter.explode(constants.BUSINESSES[business.key].coinsEmit*10, business.x + 90, business.y + 60)
   }
   
   setArrow (component) {

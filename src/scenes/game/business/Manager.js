@@ -106,13 +106,14 @@ export default class Manager extends Phaser.GameObjects.Container {
     this.add(this.managerSprite)
 
     let frameIni = params.managerIndex + 0
+
     params.scene.anims.create({
-      key: `idle-${'dwarf1_emote'}-${frameIni}`,
-      frames: params.scene.anims.generateFrameNumbers('dwarf1_emote', { frames: [ frameIni, frameIni + 1] }),
+      key: `idle-${params.managerKey}_emote-${frameIni}`,
+      frames: params.scene.anims.generateFrameNumbers(`${params.managerKey}_emote`, { frames: [ frameIni, frameIni + 1] }),
       frameRate: 5,
       repeat: -1
     })
-    this.managerSprite.play(`idle-${'dwarf1_emote'}-${frameIni}`)
+    this.managerSprite.play(`idle-${params.managerKey}_emote-${frameIni}`)
 
   }
 

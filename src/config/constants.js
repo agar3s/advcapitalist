@@ -44,7 +44,8 @@ const BUSINESSES = {
     revenue: 100,
     managerCost: 100000,
     managerKey: 'dwarf1',
-    managerIndex: 0
+    managerIndex: 0,
+    coinsEmit: 4
   },
   DRILL: {
     business: 'Drill',
@@ -56,7 +57,8 @@ const BUSINESSES = {
     revenue: 6000,
     managerCost: 1500000,
     managerKey: 'dwarf2',
-    managerIndex: 51
+    managerIndex: 51,
+    coinsEmit: 6
   },
   TAVERN: {
     business: 'Tavern',
@@ -68,7 +70,8 @@ const BUSINESSES = {
     revenue: 54000,
     managerCost: 10000000,
     managerKey: 'dwarf1',
-    managerIndex: 54
+    managerIndex: 54,
+    coinsEmit: 8
   },
   FORGE: {
     business: 'Forge',
@@ -80,7 +83,8 @@ const BUSINESSES = {
     revenue: 432000,
     managerCost: 50000000,
     managerKey: 'dwarf2',
-    managerIndex: 3
+    managerIndex: 0,
+    coinsEmit: 10
   },
   JEWELERY: {
     business: 'Jewelery',
@@ -92,7 +96,8 @@ const BUSINESSES = {
     revenue: 5184000,
     managerCost: 120000000,
     managerKey: 'dwarf2',
-    managerIndex: 6
+    managerIndex: 6,
+    coinsEmit: 12
   },
   TRADE: {
     business: 'Trade',
@@ -104,7 +109,8 @@ const BUSINESSES = {
     revenue: 62208000,
     managerCost: 1000000000,
     managerKey: 'dwarf1',
-    managerIndex: 6
+    managerIndex: 6,
+    coinsEmit: 15
   },
   CASTLE: {
     business: 'Castle',
@@ -116,7 +122,8 @@ const BUSINESSES = {
     revenue: 746496000,
     managerCost: 11111111100,
     managerKey: 'dwarf2',
-    managerIndex: 57
+    managerIndex: 57,
+    coinsEmit: 20
   },
   ARMY: {
     business: 'Army',
@@ -128,7 +135,8 @@ const BUSINESSES = {
     revenue: 8954952000,
     managerCost: 55555555500,
     managerKey: 'dwarf2',
-    managerIndex: 3
+    managerIndex: 3,
+    coinsEmit: 30
   },
   QUEST: {
     business: 'Quest',
@@ -140,7 +148,8 @@ const BUSINESSES = {
     revenue: 1074954240,
     managerCost: 1000000000000,
     managerKey: 'dwarf2',
-    managerIndex: 54
+    managerIndex: 54,
+    coinsEmit: 50
   }
 }
 
