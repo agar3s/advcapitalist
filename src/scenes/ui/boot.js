@@ -12,6 +12,8 @@ export default class BootScene extends Scene {
 
   preload() {
     super.preload()
+    this.add.image(0,0,'mainBG').setOrigin(0, 0)
+    this.add.image(320, 400, 'title')
 
     let progressBox = this.add.graphics()
     let progressBar = this.add.graphics()
@@ -21,7 +23,7 @@ export default class BootScene extends Scene {
 
     let loadingText = this.add.text(
       width / 2,
-      height / 2 - 100,
+      height / 2 + 100,
       'LOADING...',
       {
         fontFamily: 'CalvertMT-Bold',
@@ -35,7 +37,7 @@ export default class BootScene extends Scene {
 
     let percentText = this.add.text(
       width / 2,
-      height / 2 - 10,
+      height / 2 + 190,
       '0%',
       {
         fontFamily: 'CalvertMT-Bold',
@@ -49,7 +51,7 @@ export default class BootScene extends Scene {
 
     let assetText = this.add.text(
       width / 2,
-      height / 2 + 70,
+      height / 2 + 270,
       '',
       {
         fontFamily: 'CalvertMT-Bold',
@@ -62,14 +64,14 @@ export default class BootScene extends Scene {
     assetText.setOrigin(0.5, 0.5)
 
     progressBox.fillStyle(0x666666, 1)
-    progressBox.fillRect(width / 2 - 300, height / 2 - 60, 600, 100)
+    progressBox.fillRect(width / 2 - 300, height / 2 + 140, 600, 100)
 
     this.load.on('progress', value => {
       progressBar.clear()
       progressBar.fillStyle(0x333333, 1)
       progressBar.fillRect(
         width / 2 + 10 - 300,
-        height / 2 - 50,
+        height / 2 + 150,
         580 * value,
         80
       )

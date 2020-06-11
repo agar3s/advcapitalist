@@ -2,6 +2,7 @@ import 'phaser'
 
 import constants from './config/constants'
 
+import PreBootScene from './scenes/ui/preboot'
 import BootScene from './scenes/ui/boot'
 
 import SplashScene from './scenes/ui/splash'
@@ -40,6 +41,7 @@ window.game = new Phaser.Game({
     autoCenter: Phaser.Scale.CENTER_BOTH
   },
   scene: [
+    PreBootScene,
     BootScene,
     SplashScene,
     MadeWithScene,
