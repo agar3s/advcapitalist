@@ -15,6 +15,11 @@ let stats = {
     open: true,
     arrow: 'MINER.icon'
   },
+  notification: {
+    icon: 'mines',
+    text: '-----',
+    open: false
+  },
   scene: {
     restart: false,
     current: 'bootScene'

@@ -37,6 +37,9 @@ export default class HUDGameScene extends Scene {
     // info box - tutorial
     this.buildInfoContainer()
 
+    // notification box
+    this.buildNotificationContainer()
+
     this.loadTrigger()
   }
 
@@ -93,7 +96,52 @@ export default class HUDGameScene extends Scene {
         this.hideInfo()
       }
     })
-    
+  }
+
+  buildNotificationContainer() {
+    this.notificationContainer = this.add.container(0, -200)
+    let bg = this.add.sprite(320, 10, 'notificationBG').setOrigin(0.5, 0)
+    this.notificationContainer.add(bg)
+    this.icon = this.add.sprite(40, 75, 'mines')
+    this.notificationContainer.add(this.icon)
+    this.notificationText = this.add.text(
+      160,
+      80,
+      'Miners increase speed X2',
+      {
+        fontFamily: 'CalvertMT-Bold',
+        color: '#fff',
+        align: 'left',
+        fontSize: '32px',
+        wordWrap: { width: 450 }
+      }
+    )
+    this.notificationText.setStroke('#000000', 6)
+    this.notificationText.setOrigin(0, 0)
+    this.notificationContainer.add(this.notificationText)
+
+    this.showNotificationTween = this.tweens.add({
+      targets: this.notificationContainer,
+      y: -50,
+      ease: 'Cubic.easeInOut',
+      duration: 500,
+      hold: 2000,
+      yoyo: true,
+      paused: true
+    })
+
+    gs.setListener('notification.open', value => {
+      if (value) this.displayNotification()
+    })
+  }
+
+  displayNotification() {
+    let notification = gs.stats.notification
+    this.icon.destroy()
+    this.notificationText.text = notification.text
+    this.icon = this.add.sprite(40, 75, notification.icon).setOrigin(0)
+    this.notificationContainer.add(this.icon)
+    this.showNotificationTween.play()
   }
 
   loadTrigger() {

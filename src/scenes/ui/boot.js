@@ -121,6 +121,7 @@ export default class BootScene extends Scene {
     this.load.image('infoBox', uiRoute + 'info.png')
     this.load.image('dwarfKing', uiRoute + 'dwarf.png')
     this.load.image('arrow', uiRoute + 'arrow.png')
+    this.load.image('notificationBG', uiRoute + 'notification.png')
     
     this.load.spritesheet('progressSpriteBar', uiRoute + 'load_fill_bar_sprite.png', {
       frameWidth: 344,

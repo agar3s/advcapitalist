@@ -75,6 +75,15 @@ export default class Invest extends Phaser.GameObjects.Container {
 
     this.arrow = params.scene.add.sprite(150, 80, 'arrow')
     this.arrow.setVisible(false)
+    this.arrowTween = this.scene.tweens.add({
+      targets: this.arrow,
+      y: 95,
+      ease: 'Sine.easeInOut',
+      duration: 400,
+      yoyo: true,
+      loop: -1,
+      paused: true
+    })
     this.scene = params.scene
     this.add(this.arrow)
   }
@@ -92,14 +101,7 @@ export default class Invest extends Phaser.GameObjects.Container {
 
   displayArrow() {
     this.arrow.setVisible(true)
-    this.arrowTween = this.scene.tweens.add({
-      targets: this.arrow,
-      y: 95,
-      ease: 'Sine.easeInOut',
-      duration: 400,
-      yoyo: true,
-      loop: -1,
-    })
+    this.arrowTween.play()
   }
 
   checkArrow() {

@@ -72,13 +72,14 @@ export default class Icon extends Phaser.GameObjects.Container {
       ease: 'Sine.easeInOut',
       duration: 600,
       yoyo: true,
-      loop: -1,
+      loop: -1
     })
   }
   
   checkArrow() {
     if (!this.arrow.visible) return
     this.arrow.setVisible(false)
+    this.arrowTween.stop()
     
     gs.set('tutorial.open', false)
   }

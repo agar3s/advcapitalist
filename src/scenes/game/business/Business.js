@@ -21,6 +21,7 @@ export default class Business extends Phaser.GameObjects.Container {
     super(params.scene, params.x, params.y)
 
     this.key = params.key
+    this._icon = params.icon
     let fromStats = gs.bs[this.key]
     
     // const data
@@ -45,7 +46,6 @@ export default class Business extends Phaser.GameObjects.Container {
 
     let bg = params.scene.add.sprite(3, 0, 'businessBg').setOrigin(0)
     this.add(bg)
-
     this.icon = new Icon({
       scene: params.scene,
       x: 32,
@@ -182,10 +182,17 @@ export default class Business extends Phaser.GameObjects.Container {
     this.investButton.updateText(`${formatter.format(this.cost*0.01)}`)
   }
 
+  displayNotification(text) {
+    gs.stats.notification.icon = this._icon
+    gs.stats.notification.text = text
+    gs.set('notification.open', true)
+  }
+
   checkUnlock() {
     if (gs.bs[this.key].investments != unlockValues[this.nextUnlockIndex]) return
     this.nextUnlockIndex += 1
     gs.bs[this.key].speed *= 2
+    this.displayNotification(`${this.key} speed increased X2`)
     this.checkProgressBarUpdate()
   }
 
