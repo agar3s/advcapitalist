@@ -83,9 +83,14 @@ export default class GameScene extends Scene {
       this.businesses[key] = businessObject
       idleEarnings += businessObject.calculateIdleAway()
     });
-    
-    console.log('total earned ', idleEarnings)
-    this.addMoney(idleEarnings)
+    console.log(`We made ${idleEarnings} while you were away`)
+    if (idleEarnings) {
+      gs.stats.notification.icon = 'coin'
+      gs.stats.notification.text = `We made ${idleEarnings} while you were away`
+      setTimeout(_ => gs.set('notification.open', true), 500)
+      this.addMoney(idleEarnings)
+    }
+
     if (gs.stats.tutorial.open) this.setArrow(gs.stats.tutorial.arrow)
     gs.setListener('tutorial.arrow', value => {
       this.setArrow(value)

@@ -152,7 +152,7 @@ const TRIGGERS = {
     nextTrigger: 'TUTO_D'
   },
   TUTO_D: {
-    text: 'We can get more gold if we use a mechanical drill!\nBuild one!',
+    text: 'We can get more gold if we use a mechanical drill!\nBuy one!',
     watch: 'game.money',
     condition: 6000,
     arrow: 'DRILL.invest',
