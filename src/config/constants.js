@@ -237,6 +237,21 @@ const MANAGERS = {
   }
 }
 
+const TITLES = [
+  'Miner',
+  'Mechanical Miner',
+  'Lord of the Taverns',
+  'Hefestos apprentice',
+  'Lord of the Rings',
+  'Dwarfco Polo',
+  'King',
+  'Emperor',
+  'Conqueror',
+  'The Chosen one',
+  'Closest Dwarf to the gods',
+  'Beyond good and evil'
+]
+
 export default {
   WIDTH: 640,
   HEIGHT: 1280,
@@ -252,5 +267,6 @@ export default {
   BUSINESS_KEYS,
   BUSINESSES,
   TRIGGERS,
+  TITLES,
   KEY: 'value'
 }

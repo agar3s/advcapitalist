@@ -63,6 +63,7 @@ export default class HUDGameScene extends Scene {
     )
     this.titleLabel.setStroke('#000000', 8)
     this.titleLabel.setOrigin(0, 0.5)
+    gs.setListener('character.title', title => this.titleLabel.text = title)
     
     this.levelLabel = this.add.text(
       170,
@@ -77,6 +78,7 @@ export default class HUDGameScene extends Scene {
     )
     this.levelLabel.setStroke('#000000', 8)
     this.levelLabel.setOrigin(0, 0.5)
+    gs.setListener('character.level', level => this.levelLabel.text = `Level ${level}`)
 
     // info box - tutorial
     this.buildInfoContainer()

@@ -57,7 +57,7 @@ export default class GameScene extends Scene {
     
     // loag mx bg
     this.bgMain = this.sound.add('bgMain')
-    this.bgMain.volume = 0.15
+    this.bgMain.volume = 0.05
     this.bgMain.play({
       loop: true
     })
@@ -169,9 +169,22 @@ export default class GameScene extends Scene {
     gs.set('game.money', gs.stats.game.money + money)
   }
 
+  addMoneySpent (money) {
+    gs.stats.game.moneySpent += money
+    if (gs.stats.game.moneySpent*0.01 > Math.pow(1.8, gs.stats.character.level + 8)) {
+      this.levelUp()
+    }
+  }
+
+  levelUp() {
+    gs.set('character.level', gs.stats.character.level + 1)
+    gs.set('character.title', constants.TITLES[parseInt(gs.stats.character.level / 5)] || 'DWARF GOD')
+  }
+
   checkInvesment (business) {
     if (gs.stats.game.money < business.cost) return
     this.addMoney(-business.cost)
+    this.addMoneySpent(business.cost)
     business.invest()
     this.sfxInvest.play()
     this.coinsEmitter.explode(constants.BUSINESSES[business.key].coinsEmit, business.x + 90, business.y + 60)
@@ -180,6 +193,7 @@ export default class GameScene extends Scene {
   checkHire (business) {
     if (gs.stats.game.money < business.managerCost) return
     this.addMoney(-business.managerCost)
+    this.addMoneySpent(business.managerCost)
     business.hireManager()
     this.sfxHireManager.play()
     this.coinsEmitter.explode(constants.BUSINESSES[business.key].coinsEmit*10, business.x + 90, business.y + 60)

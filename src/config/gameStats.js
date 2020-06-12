@@ -8,11 +8,12 @@ let stats = {
   game: {
     language: 'en',
     money: 0,
+    moneySpent: 0
   },
   character: {
     name: utils.nameGen(),
     level: 1,
-    title: 'Miner Dwarf'
+    title: 'Miner'
   },
   tutorial: {
     triggers: 'TUTO_B',
