@@ -1,7 +1,7 @@
 
 const saveGame = (data) => {
   const request = new Request(
-    'http://localhost:3000/games',
+    'https://dwarf-empire.herokuapp.com/',
     {
       method: 'POST',
       body: JSON.stringify(data),
@@ -16,7 +16,7 @@ const saveGame = (data) => {
 }
 
 const loadGame = (id, callback) => {
-  fetch(`http://localhost:3000/games/${id}`).then((response) => response.json())
+  fetch(`https://dwarf-empire.herokuapp.com/games/${id}`).then((response) => response.json())
     .then( response => callback(null, response))
     .catch(callback)
 }

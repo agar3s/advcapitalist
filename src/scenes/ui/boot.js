@@ -1,7 +1,8 @@
 import Scene from '../scene'
 
-//const env = 'PRODUCTION'
-const env = 'DEV'
+const env = 'PRODUCTION'
+//const env = 'DEV'
+const awsPrefix = 'https://agar3s-assets.s3.amazonaws.com/dwarfEmpire/'
 
 export default class BootScene extends Scene {
   constructor() {
