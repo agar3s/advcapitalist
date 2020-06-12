@@ -1,7 +1,7 @@
 
 const saveGame = (data) => {
   const request = new Request(
-    'https://dwarf-empire.herokuapp.com/',
+    'https://dwarf-empire.herokuapp.com/games',
     {
       method: 'POST',
       body: JSON.stringify(data),
