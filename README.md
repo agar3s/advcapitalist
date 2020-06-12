@@ -36,7 +36,7 @@ The game uses 4 scenes:
 * `src/scenes/game/game.js` is the main scene, contains a dictionary of `Business`, sound bg and fxs, particle emitters.
 
 ### Time management for idle component
-Time update is not handled by phaser as the update process does not work properly when the tab is not visible, to keep the expected idle behaviour for the game a setTimeout approach was made.
+Time update is not handled by phaser as the update process does not work properly when the tab is not visible, to keep the expected idle behaviour for the game a setTimeout approach was made. This is only used for logic calculations.
 
 * `src/managers/timeManager.js` is a singleton that handles a continous loop that notifies every subscriber when a tick has completed sending the delta time to do the proper calculation.
 ```javascript
