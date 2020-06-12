@@ -9,6 +9,11 @@ let stats = {
     language: 'en',
     money: 0,
   },
+  character: {
+    name: utils.nameGen(),
+    level: 1,
+    title: 'Miner Dwarf'
+  },
   tutorial: {
     triggers: 'TUTO_B',
     text: 'Welcome to the Dwarf lands!\nHelp us to get some gold by clicking on the PickAxe!',

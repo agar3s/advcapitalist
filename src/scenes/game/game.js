@@ -189,6 +189,7 @@ export default class GameScene extends Scene {
     let [key, sub] = component.split('.')
     this.children.bringToTop(this.businesses[key])
     this.businesses[key].displayArrowOn(sub)
+    this.children.bringToTop(this.coins)
   }
 
   shutdown () {

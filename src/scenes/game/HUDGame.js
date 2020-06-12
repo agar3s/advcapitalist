@@ -16,7 +16,7 @@ export default class HUDGameScene extends Scene {
     bg.fillStyle(0x0, 0.75)
     bg.fillRect(0, 0, 640, 165)
     
-    let goldIcon = this.add.sprite(620, 35, 'coin').setOrigin(1, 0)
+    let goldIcon = this.add.sprite(620, 35, 'coin').setOrigin(1, 0).setScale(0.8)
 
     let avatar = this.add.sprite(25, 15, 'avatar')
     avatar.setOrigin(0)
@@ -29,11 +29,54 @@ export default class HUDGameScene extends Scene {
         fontFamily: 'CalvertMT-Bold',
         color: '#fff',
         align: 'right',
-        fontSize: '32px'
+        fontSize: '28px'
       }
     )
     this.moneyLabel.setStroke('#000000', 8)
     this.moneyLabel.setOrigin(1, 0.5)
+
+    // profile
+    this.nameLabel = this.add.text(
+      170,
+      45,
+      gs.stats.character.name,
+      {
+        fontFamily: 'CalvertMT-Bold',
+        color: '#ffb200',
+        align: 'left',
+        fontSize: '30px'
+      }
+    )
+    this.nameLabel.setStroke('#000000', 8)
+    this.nameLabel.setOrigin(0, 0.5)
+
+    this.titleLabel = this.add.text(
+      170,
+      80,
+      gs.stats.character.title,
+      {
+        fontFamily: 'CalvertMT-Bold',
+        color: '#fff',
+        align: 'left',
+        fontSize: '22px'
+      }
+    )
+    this.titleLabel.setStroke('#000000', 8)
+    this.titleLabel.setOrigin(0, 0.5)
+    
+    this.levelLabel = this.add.text(
+      170,
+      120,
+      `Level ${gs.stats.character.level}`,
+      {
+        fontFamily: 'CalvertMT-Bold',
+        color: '#ffed32',
+        align: 'left',
+        fontSize: '30px'
+      }
+    )
+    this.levelLabel.setStroke('#000000', 8)
+    this.levelLabel.setOrigin(0, 0.5)
 
     // info box - tutorial
     this.buildInfoContainer()
