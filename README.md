@@ -35,26 +35,55 @@ The game uses 4 scenes:
 * `src/scenes/game/HUDgame.js` displays notifications and avatar related data. ![image](https://user-images.githubusercontent.com/1063587/84469511-d2a5f080-ac46-11ea-95c8-f615486158dd.png)
 * `src/scenes/game/game.js` is the main scene, contains a dictionary of `Business`, sound bg and fxs, particle emitters.
 
+### Time management for idle component
+Time update is not handled by phaser as the update process does not work properly when the tab is not visible, to keep the expected idle behaviour for the game a setTimeout approach was made.
+
+* `src/managers/timeManager.js` is a singleton that handles a continous loop that notifies every subscriber when a tick has completed sending the delta time to do the proper calculation.
+```javascript
+  loop() {
+    if (!this.running) return
+    const now = +Date.now()
+    const delta = now - this.lastTime
+    this.subscribers.forEach( subscriber => {
+      subscriber.updateIdle(delta)
+    })
+    this.lastTime = now
+    setTimeout( _ => this.loop(), RefreshRatio)
+  }
+```
+
 ### Business
-`src/scenes/game/business/Business.js`
+
 ![image](https://user-images.githubusercontent.com/1063587/84469721-56f87380-ac47-11ea-8242-8410c9076a39.png)
+
+`src/scenes/game/business/Business.js`
 Is a Container that groups all the behaviour and logic related to the business, is composed by:
 
+
 ![image](https://user-images.githubusercontent.com/1063587/84470253-8b206400-ac48-11ea-9ffc-10d6ef6628e4.png)
+
 `src/scenes/game/businesss/Icon.js`: contains the icon image for the business, handles the action of produce money, and displays the total invesments on this business, also a progress bar indicating how far is to duplicate the production speed. 
 
+
 ![image](https://user-images.githubusercontent.com/1063587/84470326-bb680280-ac48-11ea-950e-2296d65a5dae.png)
+
 `src/scenes/game/business/Progress.js` displays the progress of the production and how much money will be generated after completion.
 
+
 ![image](https://user-images.githubusercontent.com/1063587/84470355-cde23c00-ac48-11ea-914c-4282fe0e51e3.png)
+
 `src/scenes/game/business/Invest.js` handles the action of invest, it also displays the ammount of money required to purchase.
 
 
 ![image](https://user-images.githubusercontent.com/1063587/84470401-e7838380-ac48-11ea-8166-90937e24b182.png)
+
 `src/scenes/game/business/Time.js` displays the remaining time to get the money.
 
+
 ![image](https://user-images.githubusercontent.com/1063587/84470440-f8cc9000-ac48-11ea-93c3-4e25cd09d599.png)
+
 `src/scenes/game/business/Manager.js` is a button that allows to purchase a manager to handle automatic production, a dwarf sprite is displayed when is active.
+
 
 ### Data
 - `src/config/constants.js`: contains all non transient data, this file contains definitions about, resolution, scenes to load, debug mode and business sprites, coefficients an fixed costs.
