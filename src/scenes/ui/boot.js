@@ -175,6 +175,7 @@ export default class BootScene extends Scene {
     this.load.audio('sfxManagerAvailable', urlBase + 'assets/audio/fx/managerAvailable.ogg')
     this.load.audio('sfxProduce', urlBase + 'assets/audio/fx/produce.ogg')
     this.load.audio('sfxMinerProduce', urlBase + 'assets/audio/fx/minerProduce.ogg')
+    this.load.audio('sfxTavernProduce', urlBase + 'assets/audio/fx/tavernProduce.ogg')
     this.load.audio('sfxForgeProduce', urlBase + 'assets/audio/fx/forgeProduce.ogg')
     this.load.audio('sfxJeweleryProduce', urlBase + 'assets/audio/fx/jeweleryProduce.ogg')
     this.load.audio('sfxTradeProduce', urlBase + 'assets/audio/fx/tradeProduce.ogg')
@@ -184,6 +185,7 @@ export default class BootScene extends Scene {
     this.load.audio('sfxUnlockBusiness', urlBase + 'assets/audio/fx/unlockBusiness.ogg')
     this.load.audio('sfxBusinessUnlocked', urlBase + 'assets/audio/fx/businessUnlocked.ogg')
     this.load.audio('sfxTutorialAppears', urlBase + 'assets/audio/fx/tutorialAppears.ogg')
+    this.load.audio('sfxDwarfHello', urlBase + 'assets/audio/fx/dwarfHello.ogg')
 
     // load json
     this.load.json('translations', urlBase + 'assets/texts.json')

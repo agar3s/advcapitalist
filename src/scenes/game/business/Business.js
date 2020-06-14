@@ -60,7 +60,8 @@ export default class Business extends Phaser.GameObjects.Container {
       y: 24,
       auto: !this.updateTimers
     })
-    this.progressBar.updateRevenueText(utils.parseGold(this.baseRevenue*gs.bs[this.key].investments*0.01))
+    let revenue = this.updateTimers ? (this.baseRevenue*gs.bs[this.key].investments*0.01) : this.getProductivity()
+    this.progressBar.updateRevenueText(utils.parseGold(revenue))
     this.add(this.progressBar)
 
     // remaining time label
@@ -217,7 +218,7 @@ export default class Business extends Phaser.GameObjects.Container {
   }
 
   evaluateUpdateTimers () {
-    this.updateTimers = !gs.bs[this.key].manager || (this.baseTime/gs.bs[this.key].speed) > 500
+    this.updateTimers = !gs.bs[this.key].manager || (this.baseTime/gs.bs[this.key].speed) > 900
   }
 
   checkProgressBarUpdate() {
