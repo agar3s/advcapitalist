@@ -4,7 +4,7 @@
 # Dwarf Empire
 
 **Dwarf Empire** is an HTML5 game based on [Adventure Capitalist](https://en.wikipedia.org/wiki/AdVenture_Capitalist)., created with [Phaser3-boilerplate template](https://github.com/blackmambastudio/phaser3-jam-boilerplate).
-The game was designed mobile first and you can play it now on: <strike>[https://dwarf-empire.herokuapp.com/](https://dwarf-empire.herokuapp.com/)</strike>  [https://agar3s.itch.io/dwarf-empire](https://agar3s.itch.io/dwarf-empire)
+The game was designed mobile first and you can play it now on: <strike>https://dwarf-empire.herokuapp.com/</strike>  [https://agar3s.itch.io/dwarf-empire](https://agar3s.itch.io/dwarf-empire)
 
 ## Development
 ### Installation
